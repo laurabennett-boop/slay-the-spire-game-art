@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DARK SPIRE — Animated Sprite Preview</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0f;
+    color: #e0d8c8;
+    font-family: 'Noto Sans SC', sans-serif;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(60, 20, 80, 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(20, 40, 80, 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(80, 20, 20, 0.2) 0%, transparent 50%);
+    z-index: -1;
+    animation: bgPulse 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes bgPulse { 0% { opacity: 0.6; } 100% { opacity: 1; } }
+
+  .header {
+    text-align: center;
+    padding: 50px 20px 30px;
+  }
+
+  .header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.8em;
+    font-weight: 900;
+    background: linear-gradient(135deg, #c9a84c, #f0d878, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+  }
+
+  .header .subtitle {
+    font-size: 1.05em;
+    color: #8a7f6f;
+    letter-spacing: 2px;
+    font-weight: 300;
+  }
+
+  .header .divider {
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+    margin: 20px auto 0;
+  }
+
+  .nav-links {
+    text-align: center;
+    padding: 16px;
+  }
+
+  .nav-links a {
+    color: #c9a84c;
+    text-decoration: none;
+    font-size: 0.9em;
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 6px 16px;
+    border-radius: 20px;
+    transition: all 0.3s;
+  }
+
+  .nav-links a:hover {
+    background: rgba(201,168,76,0.15);
+  }
+
+  /* Controls */
+  .global-controls {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding: 20px;
+    flex-wrap: wrap;
+  }
+
+  .speed-btn {
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: #c9a84c;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85em;
+    transition: all 0.3s;
+  }
+
+  .speed-btn:hover, .speed-btn.active {
+    background: rgba(201,168,76,0.25);
+    border-color: #c9a84c;
+  }
+
+  /* Section headers */
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6em;
+    text-align: center;
+    color: #c9a84c;
+    margin: 40px 0 8px;
+  }
+
+  .section-title::before, .section-title::after {
+    content: '\25C6';
+    margin: 0 14px;
+    font-size: 0.5em;
+    vertical-align: middle;
+    opacity: 0.5;
+  }
+
+  .section-desc {
+    text-align: center;
+    color: #6a6358;
+    margin-bottom: 24px;
+    font-size: 0.85em;
+  }
+
+  /* Sprite grid */
+  .sprite-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+  }
+
+  /* Sprite card */
+  .sprite-card {
+    background: linear-gradient(145deg, rgba(20, 18, 25, 0.9), rgba(15, 12, 20, 0.95));
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .sprite-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent, #c9a84c), transparent);
+  }
+
+  .sprite-card .card-header {
+    padding: 16px 20px 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .sprite-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.15em;
+    color: var(--accent, #c9a84c);
+  }
+
+  .sprite-card .cn-name {
+    color: #8a7f6f;
+    font-size: 0.85em;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 0.7em;
+    font-weight: 700;
+  }
+
+  .badge-character { background: rgba(79,195,247,0.15); color: #4fc3f7; border: 1px solid rgba(79,195,247,0.4); }
+  .badge-normal { background: rgba(100,100,100,0.3); color: #999; border: 1px solid #555; }
+  .badge-elite { background: rgba(201,168,76,0.15); color: #c9a84c; border: 1px solid rgba(201,168,76,0.4); }
+  .badge-boss { background: rgba(239,83,80,0.15); color: #ef5350; border: 1px solid rgba(239,83,80,0.4); }
+
+  /* Animation viewport */
+  .anim-viewport {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    background:
+      repeating-conic-gradient(rgba(255,255,255,0.03) 0% 25%, transparent 0% 50%) 50% / 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .anim-viewport img {
+    position: absolute;
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .anim-viewport img.active {
+    opacity: 1;
+  }
+
+  /* Pose indicator */
+  .pose-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px;
+    flex-wrap: wrap;
+  }
+
+  .pose-dot {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.72em;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border: 1px solid rgba(201,168,76,0.2);
+    color: #6a6358;
+    background: transparent;
+    transition: all 0.3s;
+  }
+
+  .pose-dot.active {
+    border-color: var(--accent, #c9a84c);
+    color: var(--accent, #c9a84c);
+    background: rgba(201,168,76,0.1);
+  }
+
+  .pose-dot:hover {
+    border-color: rgba(201,168,76,0.5);
+    color: #c9a84c;
+  }
+
+  /* Card controls */
+  .card-controls {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 12px 14px;
+  }
+
+  .ctrl-btn {
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.2);
+    color: #8a7f6f;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    transition: all 0.3s;
+  }
+
+  .ctrl-btn:hover {
+    background: rgba(201,168,76,0.2);
+    color: #c9a84c;
+  }
+
+  .ctrl-btn.playing {
+    background: rgba(201,168,76,0.2);
+    border-color: #c9a84c;
+    color: #c9a84c;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(201, 168, 76, 0.1);
+    color: #4a4540;
+    font-size: 0.85em;
+  }
+
+  .footer a { color: #c9a84c; text-decoration: none; }
+
+  @media (max-width: 700px) {
+    .header h1 { font-size: 1.8em; }
+    .sprite-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>DARK SPIRE</h1>
+  <div class="subtitle">Transparent PNG Sprite Animation Preview</div>
+  <div class="divider"></div>
+</div>
+
+<div class="nav-links">
+  <a href="index.html">View Original Art Gallery</a>
+</div>
+
+<div class="global-controls">
+  <button class="speed-btn" data-speed="1200" onclick="setGlobalSpeed(1200, this)">Slow</button>
+  <button class="speed-btn active" data-speed="600" onclick="setGlobalSpeed(600, this)">Normal</button>
+  <button class="speed-btn" data-speed="300" onclick="setGlobalSpeed(300, this)">Fast</button>
+  <button class="speed-btn" data-speed="150" onclick="setGlobalSpeed(150, this)">Turbo</button>
+</div>
+
+<!-- CHARACTERS -->
+<div class="section-title">PLAYABLE CHARACTERS</div>
+<div class="section-desc">4 animation frames: Idle / Attack / Defend / Hurt</div>
+
+<div class="sprite-grid" id="characters-grid"></div>
+
+<!-- BOSSES -->
+<div class="section-title">BOSSES</div>
+<div class="section-desc">4 animation frames: Idle / Attack / Charge / Death</div>
+
+<div class="sprite-grid" id="bosses-grid"></div>
+
+<!-- ELITES -->
+<div class="section-title">ELITE MONSTERS</div>
+<div class="section-desc">3 animation frames: Idle / Attack / Hurt</div>
+
+<div class="sprite-grid" id="elites-grid"></div>
+
+<!-- NORMAL MONSTERS -->
+<div class="section-title">NORMAL MONSTERS</div>
+<div class="section-desc">2 animation frames: Idle / Attack</div>
+
+<div class="sprite-grid" id="normals-grid"></div>
+
+<div class="footer">
+  Transparent PNG sprites with frame animation preview &middot; Generated with <a href="https://deepmind.google/technologies/gemini/">Gemini AI</a><br>
+  Curated by Laura Bennett &middot; <a href="https://github.com/laurabennett-boop/slay-the-spire-game-art">GitHub Repository</a> &middot; April 2026
+</div>
+
+<script>
+// Entity definitions
+const entities = {
+  characters: [
+    { name: "The Wanderer", cn: "流浪剑客", accent: "#4fc3f7", badge: "character",
+      path: "png/characters/wanderer", poses: ["idle", "attack", "defend", "hurt"] },
+    { name: "The Alchemist", cn: "炼金术士", accent: "#66bb6a", badge: "character",
+      path: "png/characters/alchemist", poses: ["idle", "attack", "defend", "hurt"] },
+    { name: "The Puppeteer", cn: "傀儡师", accent: "#ce93d8", badge: "character",
+      path: "png/characters/puppeteer", poses: ["idle", "attack", "defend", "hurt"] },
+  ],
+  bosses: [
+    { name: "The Timeless Wyrm", cn: "永恒龙蛇", accent: "#ef5350", badge: "boss",
+      path: "png/monsters/boss/timeless-wyrm", poses: ["idle", "attack", "charge", "death"] },
+    { name: "The Hollow King", cn: "虚空骨王", accent: "#ab47bc", badge: "boss",
+      path: "png/monsters/boss/hollow-king", poses: ["idle", "attack", "charge", "death"] },
+  ],
+  elites: [
+    { name: "Molten Golem", cn: "熔岩石像", accent: "#ff7043", badge: "elite",
+      path: "png/monsters/elite/molten-golem", poses: ["idle", "attack", "hurt"] },
+    { name: "Dark Enchantress", cn: "暗黑女巫", accent: "#ec407a", badge: "elite",
+      path: "png/monsters/elite/dark-enchantress", poses: ["idle", "attack", "hurt"] },
+  ],
+  normals: [
+    { name: "Toxic Slime", cn: "腐蚀史莱姆", accent: "#8bc34a", badge: "normal",
+      path: "png/monsters/normal/toxic-slime", poses: ["idle", "attack"] },
+    { name: "Skeletal Knight", cn: "幽骨骑士", accent: "#78909c", badge: "normal",
+      path: "png/monsters/normal/skeletal-knight", poses: ["idle", "attack"] },
+    { name: "Fungal Beast", cn: "菌蕈巨兽", accent: "#26a69a", badge: "normal",
+      path: "png/monsters/normal/fungal-beast", poses: ["idle", "attack"] },
+    { name: "Shadow Wraith", cn: "暗影幽灵", accent: "#7e57c2", badge: "normal",
+      path: "png/monsters/normal/shadow-wraith", poses: ["idle", "attack"] },
+    { name: "Clockwork Automaton", cn: "发条机关人", accent: "#ffa726", badge: "normal",
+      path: "png/monsters/normal/clockwork-automaton", poses: ["idle", "attack"] },
+  ]
+};
+
+let globalSpeed = 600;
+const animators = [];
+
+function setGlobalSpeed(speed, btn) {
+  globalSpeed = speed;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  animators.forEach(a => { if (a.playing) { a.speed = speed; a.restart(); } });
+}
+
+function createSpriteCard(entity, container) {
+  const card = document.createElement('div');
+  card.className = 'sprite-card';
+  card.style.setProperty('--accent', entity.accent);
+
+  const id = entity.name.toLowerCase().replace(/[^a-z]/g, '-');
+
+  card.innerHTML = `
+    <div class="card-header">
+      <span class="badge badge-${entity.badge}">${entity.badge.toUpperCase()}</span>
+      <h3>${entity.name}</h3>
+      <span class="cn-name">${entity.cn}</span>
+    </div>
+    <div class="anim-viewport" id="vp-${id}">
+      ${entity.poses.map((p, i) =>
+        `<img src="${entity.path}/${p}.png" alt="${p}" data-pose="${p}" class="${i === 0 ? 'active' : ''}">`
+      ).join('\n      ')}
+    </div>
+    <div class="pose-indicator" id="pi-${id}">
+      ${entity.poses.map((p, i) =>
+        `<span class="pose-dot ${i === 0 ? 'active' : ''}" data-index="${i}" onclick="jumpToPose('${id}', ${i})">${p}</span>`
+      ).join('')}
+    </div>
+    <div class="card-controls">
+      <button class="ctrl-btn" onclick="stepPose('${id}', -1)" title="Previous">&#9664;</button>
+      <button class="ctrl-btn playing" id="play-${id}" onclick="togglePlay('${id}')" title="Play/Pause">&#9646;&#9646;</button>
+      <button class="ctrl-btn" onclick="stepPose('${id}', 1)" title="Next">&#9654;</button>
+    </div>
+  `;
+
+  container.appendChild(card);
+
+  // Set up animator
+  const animator = {
+    id,
+    currentFrame: 0,
+    totalFrames: entity.poses.length,
+    playing: true,
+    speed: globalSpeed,
+    interval: null,
+    restart() {
+      clearInterval(this.interval);
+      if (this.playing) {
+        this.interval = setInterval(() => advanceFrame(this.id), this.speed);
+      }
+    }
+  };
+
+  animator.interval = setInterval(() => advanceFrame(id), globalSpeed);
+  animators.push(animator);
+}
+
+function advanceFrame(id) {
+  const animator = animators.find(a => a.id === id);
+  if (!animator) return;
+  animator.currentFrame = (animator.currentFrame + 1) % animator.totalFrames;
+  updateDisplay(id, animator.currentFrame);
+}
+
+function updateDisplay(id, frame) {
+  const vp = document.getElementById('vp-' + id);
+  const pi = document.getElementById('pi-' + id);
+  if (!vp || !pi) return;
+
+  vp.querySelectorAll('img').forEach((img, i) => {
+    img.classList.toggle('active', i === frame);
+  });
+  pi.querySelectorAll('.pose-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === frame);
+  });
+}
+
+function jumpToPose(id, index) {
+  const animator = animators.find(a => a.id === id);
+  if (!animator) return;
+  animator.currentFrame = index;
+  updateDisplay(id, index);
+}
+
+function stepPose(id, dir) {
+  const animator = animators.find(a => a.id === id);
+  if (!animator) return;
+  animator.currentFrame = (animator.currentFrame + dir + animator.totalFrames) % animator.totalFrames;
+  updateDisplay(id, animator.currentFrame);
+}
+
+function togglePlay(id) {
+  const animator = animators.find(a => a.id === id);
+  if (!animator) return;
+  const btn = document.getElementById('play-' + id);
+
+  if (animator.playing) {
+    clearInterval(animator.interval);
+    animator.playing = false;
+    btn.innerHTML = '&#9654;';
+    btn.classList.remove('playing');
+  } else {
+    animator.playing = true;
+    animator.speed = globalSpeed;
+    animator.interval = setInterval(() => advanceFrame(id), globalSpeed);
+    btn.innerHTML = '&#9646;&#9646;';
+    btn.classList.add('playing');
+  }
+}
+
+// Build the page
+document.addEventListener('DOMContentLoaded', () => {
+  Object.entries(entities).forEach(([section, list]) => {
+    const grid = document.getElementById(section + '-grid');
+    if (!grid) return;
+    list.forEach(e => createSpriteCard(e, grid));
+  });
+});
+</script>
+
+</body>
+</html>
