@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DARK SPIRE — Roguelike Card Game Art</title>
+<title>DARK SPIRE — Complete Art Asset Pack</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700&display=swap');
 
@@ -69,7 +69,7 @@
     gap: 40px;
     padding: 20px;
     margin: 0 auto 40px;
-    max-width: 700px;
+    max-width: 900px;
     flex-wrap: wrap;
   }
 
@@ -94,7 +94,7 @@
     font-size: 1.8em;
     text-align: center;
     color: #c9a84c;
-    margin: 50px 0 30px;
+    margin: 50px 0 10px;
   }
 
   .section-title::before,
@@ -109,155 +109,126 @@
   .section-desc {
     text-align: center;
     color: #6a6358;
-    margin: -15px 0 30px;
+    margin: 8px 0 30px;
     font-size: 0.9em;
   }
 
-  /* Character cards - full width */
-  .characters {
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 20px 60px;
+  /* Entity block with pose strip */
+  .entity-block {
+    max-width: 1100px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
   }
 
-  .character-card {
+  .entity-card {
     background: linear-gradient(145deg, rgba(20, 18, 25, 0.9), rgba(15, 12, 20, 0.95));
     border: 1px solid rgba(201, 168, 76, 0.2);
     border-radius: 12px;
     overflow: hidden;
+    margin-bottom: 32px;
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .character-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(201, 168, 76, 0.1);
-  }
-
-  .character-card::before {
+  .entity-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 3px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent, #c9a84c), transparent);
   }
 
-  .card-image {
-    width: 100%;
-    display: block;
-    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+  .entity-header {
+    padding: 24px 28px 12px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
   }
 
-  .card-info { padding: 28px 32px; }
-
-  .card-number {
-    font-family: 'Cinzel', serif;
+  .entity-header .badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 12px;
     font-size: 0.75em;
-    color: #5a5348;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
-  .card-name {
-    font-family: 'Cinzel', serif;
-    font-size: 1.6em;
     font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 4px;
   }
 
-  .card-name-cn {
-    font-size: 1.1em;
-    color: #a09585;
-    margin-bottom: 16px;
+  .entity-header h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4em;
+    color: var(--accent, #c9a84c);
   }
 
-  .card-desc {
-    font-size: 0.95em;
-    line-height: 1.8;
+  .entity-header .cn-name {
     color: #8a7f6f;
+    font-size: 0.95em;
   }
 
-  .card-tags {
+  .entity-desc {
+    padding: 0 28px 16px;
+    font-size: 0.9em;
+    color: #6a6358;
+    line-height: 1.7;
+  }
+
+  .entity-tags {
+    padding: 0 28px 16px;
     display: flex;
     gap: 8px;
-    margin-top: 16px;
     flex-wrap: wrap;
   }
 
   .tag {
     padding: 4px 12px;
     border-radius: 20px;
-    font-size: 0.8em;
+    font-size: 0.78em;
     border: 1px solid rgba(201, 168, 76, 0.3);
     color: #c9a84c;
     background: rgba(201, 168, 76, 0.05);
   }
 
-  /* Grid layout for monsters and cards */
-  .grid {
+  /* Pose strip */
+  .pose-strip {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 24px;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px 60px;
+    gap: 2px;
+    background: rgba(0,0,0,0.3);
+    border-top: 1px solid rgba(201, 168, 76, 0.1);
   }
 
-  .grid-card {
-    background: linear-gradient(145deg, rgba(20, 18, 25, 0.9), rgba(15, 12, 20, 0.95));
-    border: 1px solid rgba(201, 168, 76, 0.15);
-    border-radius: 10px;
+  .pose-strip.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .pose-strip.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .pose-strip.cols-2 { grid-template-columns: repeat(2, 1fr); }
+
+  .pose-item {
+    position: relative;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    transition: filter 0.3s;
   }
 
-  .grid-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-  }
+  .pose-item:hover { filter: brightness(1.15); }
 
-  .grid-card img {
+  .pose-item img {
     width: 100%;
     display: block;
+    aspect-ratio: 16/10;
+    object-fit: cover;
   }
 
-  .grid-card .info {
-    padding: 16px 20px;
-  }
-
-  .grid-card .info h3 {
+  .pose-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    padding: 20px 12px 8px;
+    text-align: center;
     font-family: 'Cinzel', serif;
-    font-size: 1.1em;
+    font-size: 0.8em;
+    letter-spacing: 2px;
     color: #c9a84c;
-    margin-bottom: 2px;
+    text-transform: uppercase;
   }
 
-  .grid-card .info .cn-name {
-    font-size: 0.9em;
-    color: #8a7f6f;
-    margin-bottom: 8px;
-  }
-
-  .grid-card .info .desc {
-    font-size: 0.85em;
-    color: #6a6358;
-    line-height: 1.6;
-  }
-
-  .grid-card .info .badge {
-    display: inline-block;
-    padding: 2px 10px;
-    border-radius: 12px;
-    font-size: 0.75em;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-
+  .badge-character { background: rgba(79,195,247,0.15); color: #4fc3f7; border: 1px solid rgba(79,195,247,0.4); }
   .badge-normal { background: rgba(100,100,100,0.3); color: #999; border: 1px solid #555; }
   .badge-elite { background: rgba(201,168,76,0.15); color: #c9a84c; border: 1px solid rgba(201,168,76,0.4); }
   .badge-boss { background: rgba(239,83,80,0.15); color: #ef5350; border: 1px solid rgba(239,83,80,0.4); }
@@ -265,27 +236,77 @@
   .badge-skill { background: rgba(79,195,247,0.15); color: #4fc3f7; border: 1px solid rgba(79,195,247,0.3); }
   .badge-power { background: rgba(102,187,106,0.15); color: #66bb6a; border: 1px solid rgba(102,187,106,0.3); }
 
-  /* Roadmap */
-  .roadmap {
-    max-width: 700px;
-    margin: 0 auto 60px;
-    padding: 0 20px;
+  /* Cards grid */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
   }
 
-  .roadmap-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 16px 0;
-    border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+  .card-item {
+    background: linear-gradient(145deg, rgba(20, 18, 25, 0.9), rgba(15, 12, 20, 0.95));
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .roadmap-icon { font-size: 1.4em; flex-shrink: 0; width: 36px; text-align: center; }
-  .roadmap-text { flex: 1; }
-  .roadmap-title { font-weight: 700; color: #c9a84c; margin-bottom: 4px; }
-  .roadmap-desc { font-size: 0.85em; color: #6a6358; }
-  .status-done { color: #4caf50; font-size: 0.8em; font-weight: 700; }
-  .status-pending { color: #5a5348; font-size: 0.8em; }
+  .card-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .card-item img {
+    width: 100%;
+    display: block;
+  }
+
+  .card-item .info {
+    padding: 16px 20px;
+  }
+
+  .card-item .info h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05em;
+    color: #c9a84c;
+    margin-bottom: 2px;
+  }
+
+  .card-item .info .cn-name {
+    font-size: 0.85em;
+    color: #8a7f6f;
+    margin-bottom: 8px;
+  }
+
+  .card-item .info .desc {
+    font-size: 0.82em;
+    color: #6a6358;
+    line-height: 1.6;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .lightbox.active { display: flex; }
+
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 8px;
+    box-shadow: 0 0 60px rgba(0,0,0,0.8);
+  }
 
   .footer {
     text-align: center;
@@ -297,12 +318,13 @@
 
   .footer a { color: #c9a84c; text-decoration: none; }
 
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     .header h1 { font-size: 1.8em; }
     .stats-bar { gap: 20px; }
-    .card-info { padding: 20px; }
-    .card-name { font-size: 1.3em; }
-    .grid { grid-template-columns: 1fr; }
+    .pose-strip.cols-4 { grid-template-columns: repeat(2, 1fr); }
+    .pose-strip.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .cards-grid { grid-template-columns: 1fr; }
+    .entity-header h3 { font-size: 1.1em; }
   }
 </style>
 </head>
@@ -310,173 +332,254 @@
 
 <div class="header">
   <h1>DARK SPIRE</h1>
-  <div class="subtitle">Roguelike Card Game — Art Preview</div>
+  <div class="subtitle">Complete Art Asset Pack — Multi-Pose Sprite Sheet</div>
   <div class="divider"></div>
 </div>
 
 <div class="stats-bar">
   <div class="stat"><div class="stat-num">3</div><div class="stat-label">Characters</div></div>
-  <div class="stat"><div class="stat-num">7</div><div class="stat-label">Monsters</div></div>
+  <div class="stat"><div class="stat-num">2</div><div class="stat-label">Bosses</div></div>
+  <div class="stat"><div class="stat-num">2</div><div class="stat-label">Elites</div></div>
+  <div class="stat"><div class="stat-num">5</div><div class="stat-label">Monsters</div></div>
   <div class="stat"><div class="stat-num">6</div><div class="stat-label">Cards</div></div>
-  <div class="stat"><div class="stat-num">16</div><div class="stat-label">Total Assets</div></div>
+  <div class="stat"><div class="stat-num">36</div><div class="stat-label">Total Images</div></div>
 </div>
 
-<!-- CHARACTERS -->
+<!-- ========== CHARACTERS ========== -->
 <div class="section-title">PLAYABLE CHARACTERS</div>
+<div class="section-desc">Each character has 4 action poses: Idle / Attack / Defend / Hurt</div>
 
-<div class="characters">
-  <div class="character-card" style="--accent: #4fc3f7;">
-    <img class="card-image" src="characters/wanderer.jpg" alt="The Wanderer">
-    <div class="card-info">
-      <div class="card-number">Character I</div>
-      <div class="card-name">The Wanderer</div>
-      <div class="card-name-cn">流浪剑客</div>
-      <div class="card-desc">
-        神秘的蒙面剑客，身披破旧的暗蓝色斗篷，手持水晶碎刃。<br>
-        <strong>流派：</strong>近战物理 + 结晶魔法。通过攻击积累「结晶」层数，消耗结晶释放强力技能。
-      </div>
-      <div class="card-tags">
-        <span class="tag">近战</span><span class="tag">结晶</span><span class="tag">护甲</span>
-      </div>
+<div class="entity-block">
+  <!-- Wanderer -->
+  <div class="entity-card" style="--accent: #4fc3f7;">
+    <div class="entity-header">
+      <span class="badge badge-character">CHARACTER</span>
+      <h3>The Wanderer</h3>
+      <span class="cn-name">流浪剑客</span>
+    </div>
+    <div class="entity-desc">
+      神秘的蒙面剑客，身披破旧的暗蓝色斗篷，银白长发，手持水晶碎刃。<br>
+      <strong>流派：</strong>近战物理 + 结晶魔法。通过攻击积累「结晶」层数，消耗结晶释放强力技能。
+    </div>
+    <div class="entity-tags">
+      <span class="tag">近战</span><span class="tag">结晶</span><span class="tag">护甲</span>
+    </div>
+    <div class="pose-strip cols-4">
+      <div class="pose-item" onclick="showLightbox(this)"><img src="characters/wanderer/idle.jpg" alt="Idle"><div class="pose-label">Idle</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="characters/wanderer/attack.jpg" alt="Attack"><div class="pose-label">Attack</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="characters/wanderer/defend.jpg" alt="Defend"><div class="pose-label">Defend</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="characters/wanderer/hurt.jpg" alt="Hurt"><div class="pose-label">Hurt</div></div>
     </div>
   </div>
 
-  <div class="character-card" style="--accent: #66bb6a;">
-    <img class="card-image" src="characters/alchemist.jpg" alt="The Alchemist">
-    <div class="card-info">
-      <div class="card-number">Character II</div>
-      <div class="card-name">The Alchemist</div>
-      <div class="card-name-cn">炼金术士</div>
-      <div class="card-desc">
-        驼背的疯狂科学家，背上背满冒泡药剂，一只黄铜机械手。<br>
-        <strong>流派：</strong>药水/毒素/化学反应。药水牌在回合结束触发连锁效果。
-      </div>
-      <div class="card-tags">
-        <span class="tag">药水</span><span class="tag">毒素</span><span class="tag">炼金</span>
-      </div>
+  <!-- Alchemist -->
+  <div class="entity-card" style="--accent: #66bb6a;">
+    <div class="entity-header">
+      <span class="badge badge-character">CHARACTER</span>
+      <h3>The Alchemist</h3>
+      <span class="cn-name">炼金术士</span>
+    </div>
+    <div class="entity-desc">
+      驼背的疯狂科学家，铜红色头发，黄铜护目镜，皮革围裙上挂满冒泡药剂。<br>
+      <strong>流派：</strong>药水/毒素/化学反应。药水牌在回合结束触发连锁效果。
+    </div>
+    <div class="entity-tags">
+      <span class="tag">药水</span><span class="tag">毒素</span><span class="tag">炼金</span>
+    </div>
+    <div class="pose-strip cols-4">
+      <div class="pose-item" onclick="showLightbox(this)"><img src="characters/alchemist/idle.jpg" alt="Idle"><div class="pose-label">Idle</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="characters/alchemist/attack.jpg" alt="Attack"><div class="pose-label">Attack</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="characters/alchemist/defend.jpg" alt="Defend"><div class="pose-label">Defend</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="characters/alchemist/hurt.jpg" alt="Hurt"><div class="pose-label">Hurt</div></div>
     </div>
   </div>
 
-  <div class="character-card" style="--accent: #ef5350;">
-    <img class="card-image" src="characters/puppeteer.jpg" alt="The Puppeteer">
-    <div class="card-info">
-      <div class="card-number">Character III</div>
-      <div class="card-name">The Puppeteer</div>
-      <div class="card-name-cn">傀儡师</div>
-      <div class="card-desc">
-        优雅却令人不安的高挑身影，指尖延伸丝线连接傀儡灵体。<br>
-        <strong>流派：</strong>召唤/操控。召唤傀儡战斗，高级技能可操控敌人互相攻击。
-      </div>
-      <div class="card-tags">
-        <span class="tag">召唤</span><span class="tag">操控</span><span class="tag">灵体</span>
-      </div>
+  <!-- Puppeteer -->
+  <div class="entity-card" style="--accent: #ce93d8;">
+    <div class="entity-header">
+      <span class="badge badge-character">CHARACTER</span>
+      <h3>The Puppeteer</h3>
+      <span class="cn-name">傀儡师</span>
+    </div>
+    <div class="entity-desc">
+      身穿紫色维多利亚大衣的苍白身影，指尖延伸紫色丝线连接暗影傀儡。<br>
+      <strong>流派：</strong>召唤/操控。召唤傀儡战斗，高级技能可操控敌人互相攻击。
+    </div>
+    <div class="entity-tags">
+      <span class="tag">召唤</span><span class="tag">操控</span><span class="tag">灵体</span>
+    </div>
+    <div class="pose-strip cols-4">
+      <div class="pose-item" onclick="showLightbox(this)"><img src="characters/puppeteer/idle.jpg" alt="Idle"><div class="pose-label">Idle</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="characters/puppeteer/attack.jpg" alt="Attack"><div class="pose-label">Attack</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="characters/puppeteer/defend.jpg" alt="Defend"><div class="pose-label">Defend</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="characters/puppeteer/hurt.jpg" alt="Hurt"><div class="pose-label">Hurt</div></div>
     </div>
   </div>
 </div>
 
-<!-- MONSTERS -->
-<div class="section-title">MONSTERS & BOSSES</div>
-<div class="section-desc">5 Normal Monsters + 2 Elite + 2 Bosses</div>
+<!-- ========== BOSSES ========== -->
+<div class="section-title">BOSSES</div>
+<div class="section-desc">Each boss has 4 action poses: Idle / Attack / Charge / Death</div>
 
-<div class="grid">
-  <div class="grid-card">
-    <img src="monsters/normal/monster-toxic-slime.jpg" alt="Toxic Slime">
-    <div class="info">
-      <span class="badge badge-normal">NORMAL</span>
-      <h3>Toxic Slime</h3>
-      <div class="cn-name">腐蚀史莱姆</div>
-      <div class="desc">半透明身躯中嵌满骨骸碎片，散发酸液。攻击时施加「腐蚀」减甲效果。</div>
-    </div>
-  </div>
-
-  <div class="grid-card">
-    <img src="monsters/normal/monster-skeletal-knight.jpg" alt="Skeletal Knight">
-    <div class="info">
-      <span class="badge badge-normal">NORMAL</span>
-      <h3>Skeletal Knight</h3>
-      <div class="cn-name">幽骨骑士</div>
-      <div class="desc">锈蚀铠甲中燃烧蓝色鬼火的骷髅战士。交替使用攻击和护甲模式。</div>
-    </div>
-  </div>
-
-  <div class="grid-card">
-    <img src="monsters/normal/monster-fungal-beast.jpg" alt="Fungal Beast">
-    <div class="info">
-      <span class="badge badge-normal">NORMAL</span>
-      <h3>Fungal Beast</h3>
-      <div class="cn-name">菌蕈巨兽</div>
-      <div class="desc">覆满毒蘑菇的巨大生物，释放孢子云。受攻击时分裂为小型菌群。</div>
-    </div>
-  </div>
-
-  <div class="grid-card">
-    <img src="monsters/normal/monster-shadow-wraith.jpg" alt="Shadow Wraith">
-    <div class="info">
-      <span class="badge badge-normal">NORMAL</span>
-      <h3>Shadow Wraith</h3>
-      <div class="cn-name">暗影幽灵</div>
-      <div class="desc">由黑烟和暗影凝聚的飘浮灵体，红色双眼刺穿黑暗。可穿透护甲直接造成伤害。</div>
-    </div>
-  </div>
-
-  <div class="grid-card">
-    <img src="monsters/normal/monster-clockwork-automaton.jpg" alt="Clockwork Automaton">
-    <div class="info">
-      <span class="badge badge-normal">NORMAL</span>
-      <h3>Clockwork Automaton</h3>
-      <div class="cn-name">发条机关人</div>
-      <div class="desc">黄铜蒸汽机械人形，锯齿手臂高速旋转。每回合攻击力递增，但3回合后需要充能。</div>
-    </div>
-  </div>
-
-  <div class="grid-card">
-    <img src="monsters/elite/elite-molten-golem.jpg" alt="Molten Golem">
-    <div class="info">
-      <span class="badge badge-elite">ELITE</span>
-      <h3>Molten Golem</h3>
-      <div class="cn-name">熔岩石像</div>
-      <div class="desc">覆盖古老符文的巨石生物，裂缝中涌出岩浆。每次受击获得「硬化」护甲层。</div>
-    </div>
-  </div>
-
-  <div class="grid-card">
-    <img src="monsters/elite/elite-dark-enchantress.jpg" alt="Dark Enchantress">
-    <div class="info">
-      <span class="badge badge-elite">ELITE</span>
-      <h3>Dark Enchantress</h3>
-      <div class="cn-name">暗黑女巫</div>
-      <div class="desc">荆棘皇冠女巫，操纵诅咒符文。每回合向牌堆注入诅咒牌，削弱你的手牌质量。</div>
-    </div>
-  </div>
-
-  <div class="grid-card">
-    <img src="monsters/boss/boss-timeless-wyrm.jpg" alt="The Timeless Wyrm">
-    <div class="info">
+<div class="entity-block">
+  <!-- Timeless Wyrm -->
+  <div class="entity-card" style="--accent: #ef5350;">
+    <div class="entity-header">
       <span class="badge badge-boss">BOSS</span>
       <h3>The Timeless Wyrm</h3>
-      <div class="cn-name">永恒龙蛇</div>
-      <div class="desc">缠绕破碎钟楼的巨龙，鳞片在过去与未来间闪烁。可回溯时间恢复血量，或加速未来增强攻击。HP: 420</div>
+      <span class="cn-name">永恒龙蛇 · HP: 420</span>
+    </div>
+    <div class="entity-desc">
+      缠绕破碎钟楼的巨龙，鳞片中嵌入齿轮与钟表碎片，琥珀色双眼燃烧时间之力。<br>
+      可回溯时间恢复血量，或加速未来增强攻击。
+    </div>
+    <div class="pose-strip cols-4">
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/boss/timeless-wyrm/idle.jpg" alt="Idle"><div class="pose-label">Idle</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/boss/timeless-wyrm/attack.jpg" alt="Attack"><div class="pose-label">Attack</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/boss/timeless-wyrm/charge.jpg" alt="Charge"><div class="pose-label">Charge</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/boss/timeless-wyrm/death.jpg" alt="Death"><div class="pose-label">Death</div></div>
     </div>
   </div>
 
-  <div class="grid-card">
-    <img src="monsters/boss/boss-hollow-king.jpg" alt="The Hollow King">
-    <div class="info">
+  <!-- Hollow King -->
+  <div class="entity-card" style="--accent: #ab47bc;">
+    <div class="entity-header">
       <span class="badge badge-boss">BOSS</span>
       <h3>The Hollow King</h3>
-      <div class="cn-name">虚空骨王</div>
-      <div class="desc">坐在骨骸与腐化水晶王座上的骷髅君主，胸腔中禁锢着亡魂漩涡。召唤亡灵仆从，吸收它们的死亡来治愈自身。HP: 380</div>
+      <span class="cn-name">虚空骨王 · HP: 380</span>
+    </div>
+    <div class="entity-desc">
+      骷髅君主，头戴黑曜石王冠，胸腔中禁锢紫色灵魂之火，手握巨型亡灵巨剑。<br>
+      召唤亡灵仆从，吸收它们的死亡来治愈自身。
+    </div>
+    <div class="pose-strip cols-4">
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/boss/hollow-king/idle.jpg" alt="Idle"><div class="pose-label">Idle</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/boss/hollow-king/attack.jpg" alt="Attack"><div class="pose-label">Attack</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/boss/hollow-king/charge.jpg" alt="Charge"><div class="pose-label">Charge</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/boss/hollow-king/death.jpg" alt="Death"><div class="pose-label">Death</div></div>
     </div>
   </div>
 </div>
 
-<!-- CARDS -->
+<!-- ========== ELITES ========== -->
+<div class="section-title">ELITE MONSTERS</div>
+<div class="section-desc">Each elite has 3 action poses: Idle / Attack / Hurt</div>
+
+<div class="entity-block">
+  <!-- Molten Golem -->
+  <div class="entity-card" style="--accent: #ff7043;">
+    <div class="entity-header">
+      <span class="badge badge-elite">ELITE</span>
+      <h3>Molten Golem</h3>
+      <span class="cn-name">熔岩石像</span>
+    </div>
+    <div class="entity-desc">破裂的岩石躯体，裂缝中涌出炽热岩浆，余烬色双眼。每次受击获得「硬化」护甲层。</div>
+    <div class="pose-strip cols-3">
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/elite/molten-golem/idle.jpg" alt="Idle"><div class="pose-label">Idle</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/elite/molten-golem/attack.jpg" alt="Attack"><div class="pose-label">Attack</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/elite/molten-golem/hurt.jpg" alt="Hurt"><div class="pose-label">Hurt</div></div>
+    </div>
+  </div>
+
+  <!-- Dark Enchantress -->
+  <div class="entity-card" style="--accent: #ec407a;">
+    <div class="entity-header">
+      <span class="badge badge-elite">ELITE</span>
+      <h3>Dark Enchantress</h3>
+      <span class="cn-name">暗黑女巫</span>
+    </div>
+    <div class="entity-desc">黑红长袍，白色长发，猩红双眼，手持扭曲法杖。每回合向牌堆注入诅咒牌，削弱你的手牌质量。</div>
+    <div class="pose-strip cols-3">
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/elite/dark-enchantress/idle.jpg" alt="Idle"><div class="pose-label">Idle</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/elite/dark-enchantress/attack.jpg" alt="Attack"><div class="pose-label">Attack</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/elite/dark-enchantress/hurt.jpg" alt="Hurt"><div class="pose-label">Hurt</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== NORMAL MONSTERS ========== -->
+<div class="section-title">NORMAL MONSTERS</div>
+<div class="section-desc">Each monster has 2 action poses: Idle / Attack</div>
+
+<div class="entity-block">
+  <!-- Toxic Slime -->
+  <div class="entity-card" style="--accent: #8bc34a;">
+    <div class="entity-header">
+      <span class="badge badge-normal">NORMAL</span>
+      <h3>Toxic Slime</h3>
+      <span class="cn-name">腐蚀史莱姆</span>
+    </div>
+    <div class="entity-desc">半透明绿黄色不定形体，冒泡的酸液表面，内部可见暗色毒核。攻击时施加「腐蚀」减甲效果。</div>
+    <div class="pose-strip cols-2">
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/normal/toxic-slime/idle.jpg" alt="Idle"><div class="pose-label">Idle</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/normal/toxic-slime/attack.jpg" alt="Attack"><div class="pose-label">Attack</div></div>
+    </div>
+  </div>
+
+  <!-- Skeletal Knight -->
+  <div class="entity-card" style="--accent: #78909c;">
+    <div class="entity-header">
+      <span class="badge badge-normal">NORMAL</span>
+      <h3>Skeletal Knight</h3>
+      <span class="cn-name">幽骨骑士</span>
+    </div>
+    <div class="entity-desc">锈蚀铠甲中燃烧青色鬼火的骷髅战士，手持锯齿长剑和破裂塔盾。交替使用攻击和护甲模式。</div>
+    <div class="pose-strip cols-2">
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/normal/skeletal-knight/idle.jpg" alt="Idle"><div class="pose-label">Idle</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/normal/skeletal-knight/attack.jpg" alt="Attack"><div class="pose-label">Attack</div></div>
+    </div>
+  </div>
+
+  <!-- Fungal Beast -->
+  <div class="entity-card" style="--accent: #26a69a;">
+    <div class="entity-header">
+      <span class="badge badge-normal">NORMAL</span>
+      <h3>Fungal Beast</h3>
+      <span class="cn-name">菌蕈巨兽</span>
+    </div>
+    <div class="entity-desc">腐木与蘑菇生长构成的巨大生物，青色和紫色发光蘑菇从肩部和背部长出。释放孢子云，受攻击时分裂为小型菌群。</div>
+    <div class="pose-strip cols-2">
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/normal/fungal-beast/idle.jpg" alt="Idle"><div class="pose-label">Idle</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/normal/fungal-beast/attack.jpg" alt="Attack"><div class="pose-label">Attack</div></div>
+    </div>
+  </div>
+
+  <!-- Shadow Wraith -->
+  <div class="entity-card" style="--accent: #7e57c2;">
+    <div class="entity-header">
+      <span class="badge badge-normal">NORMAL</span>
+      <h3>Shadow Wraith</h3>
+      <span class="cn-name">暗影幽灵</span>
+    </div>
+    <div class="entity-desc">由黑烟和暗影凝聚的飘浮灵体，破碎的幽灵长袍，苍白骷髅面容配猩红双眼。可穿透护甲直接造成伤害。</div>
+    <div class="pose-strip cols-2">
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/normal/shadow-wraith/idle.jpg" alt="Idle"><div class="pose-label">Idle</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/normal/shadow-wraith/attack.jpg" alt="Attack"><div class="pose-label">Attack</div></div>
+    </div>
+  </div>
+
+  <!-- Clockwork Automaton -->
+  <div class="entity-card" style="--accent: #ffa726;">
+    <div class="entity-header">
+      <span class="badge badge-normal">NORMAL</span>
+      <h3>Clockwork Automaton</h3>
+      <span class="cn-name">发条机关人</span>
+    </div>
+    <div class="entity-desc">黄铜蒸汽朋克机械人形，外露齿轮与活塞，单只青色透镜眼，锯齿臂和活塞锤臂。每回合攻击力递增，3回合后需充能。</div>
+    <div class="pose-strip cols-2">
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/normal/clockwork-automaton/idle.jpg" alt="Idle"><div class="pose-label">Idle</div></div>
+      <div class="pose-item" onclick="showLightbox(this)"><img src="monsters/normal/clockwork-automaton/attack.jpg" alt="Attack"><div class="pose-label">Attack</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== CARDS ========== -->
 <div class="section-title">CARD ART</div>
 <div class="section-desc">Attack / Skill / Power Cards</div>
 
-<div class="grid">
-  <div class="grid-card">
-    <img src="cards/attack/card-crystal-strike.jpg" alt="Crystal Strike">
+<div class="cards-grid">
+  <div class="card-item" onclick="showLightbox(this)">
+    <img src="cards/crystal-strike.jpg" alt="Crystal Strike">
     <div class="info">
       <span class="badge badge-attack">ATTACK</span>
       <h3>Crystal Strike</h3>
@@ -485,8 +588,8 @@
     </div>
   </div>
 
-  <div class="grid-card">
-    <img src="cards/attack/card-volatile-flask.jpg" alt="Volatile Flask">
+  <div class="card-item" onclick="showLightbox(this)">
+    <img src="cards/volatile-flask.jpg" alt="Volatile Flask">
     <div class="info">
       <span class="badge badge-attack">ATTACK</span>
       <h3>Volatile Flask</h3>
@@ -495,8 +598,8 @@
     </div>
   </div>
 
-  <div class="grid-card">
-    <img src="cards/skill/card-toxic-brew.jpg" alt="Toxic Brew">
+  <div class="card-item" onclick="showLightbox(this)">
+    <img src="cards/toxic-brew.jpg" alt="Toxic Brew">
     <div class="info">
       <span class="badge badge-skill">SKILL</span>
       <h3>Toxic Brew</h3>
@@ -505,8 +608,8 @@
     </div>
   </div>
 
-  <div class="grid-card">
-    <img src="cards/skill/card-crystal-armor.jpg" alt="Crystal Armor">
+  <div class="card-item" onclick="showLightbox(this)">
+    <img src="cards/crystal-armor.jpg" alt="Crystal Armor">
     <div class="info">
       <span class="badge badge-skill">SKILL</span>
       <h3>Crystal Armor</h3>
@@ -515,8 +618,8 @@
     </div>
   </div>
 
-  <div class="grid-card">
-    <img src="cards/skill/card-shadow-puppet.jpg" alt="Shadow Puppet">
+  <div class="card-item" onclick="showLightbox(this)">
+    <img src="cards/shadow-puppet.jpg" alt="Shadow Puppet">
     <div class="info">
       <span class="badge badge-skill">SKILL</span>
       <h3>Shadow Puppet</h3>
@@ -525,8 +628,8 @@
     </div>
   </div>
 
-  <div class="grid-card">
-    <img src="cards/power/card-soul-harvest.jpg" alt="Soul Harvest">
+  <div class="card-item" onclick="showLightbox(this)">
+    <img src="cards/soul-harvest.jpg" alt="Soul Harvest">
     <div class="info">
       <span class="badge badge-power">POWER</span>
       <h3>Soul Harvest</h3>
@@ -536,65 +639,25 @@
   </div>
 </div>
 
-<!-- ROADMAP -->
-<div class="section-title">ROADMAP</div>
-
-<div class="roadmap">
-  <div class="roadmap-item">
-    <div class="roadmap-icon">&#9876;</div>
-    <div class="roadmap-text">
-      <div class="roadmap-title">Playable Characters <span class="status-done">DONE</span></div>
-      <div class="roadmap-desc">3 unique character concepts with distinct playstyles</div>
-    </div>
-  </div>
-  <div class="roadmap-item">
-    <div class="roadmap-icon">&#128128;</div>
-    <div class="roadmap-text">
-      <div class="roadmap-title">Normal Monsters <span class="status-done">DONE</span></div>
-      <div class="roadmap-desc">5 normal enemies: Toxic Slime, Skeletal Knight, Fungal Beast, Shadow Wraith, Clockwork Automaton</div>
-    </div>
-  </div>
-  <div class="roadmap-item">
-    <div class="roadmap-icon">&#9760;</div>
-    <div class="roadmap-text">
-      <div class="roadmap-title">Elite & Bosses <span class="status-done">DONE</span></div>
-      <div class="roadmap-desc">2 Elite (Molten Golem, Dark Enchantress) + 2 Bosses (Timeless Wyrm, Hollow King)</div>
-    </div>
-  </div>
-  <div class="roadmap-item">
-    <div class="roadmap-icon">&#127183;</div>
-    <div class="roadmap-text">
-      <div class="roadmap-title">Card Art <span class="status-done">DONE</span></div>
-      <div class="roadmap-desc">6 cards: 2 Attack, 3 Skill, 1 Power</div>
-    </div>
-  </div>
-  <div class="roadmap-item">
-    <div class="roadmap-icon">&#127956;</div>
-    <div class="roadmap-text">
-      <div class="roadmap-title">Scenes & Backgrounds <span class="status-pending">NEXT</span></div>
-      <div class="roadmap-desc">3-4 dungeon scenes for different acts</div>
-    </div>
-  </div>
-  <div class="roadmap-item">
-    <div class="roadmap-icon">&#127942;</div>
-    <div class="roadmap-text">
-      <div class="roadmap-title">Relics <span class="status-pending">NEXT</span></div>
-      <div class="roadmap-desc">5-6 relic icons with unique effects</div>
-    </div>
-  </div>
-  <div class="roadmap-item">
-    <div class="roadmap-icon">&#128187;</div>
-    <div class="roadmap-text">
-      <div class="roadmap-title">UI Elements <span class="status-pending">NEXT</span></div>
-      <div class="roadmap-desc">HP bar, energy orbs, card backs, buttons</div>
-    </div>
-  </div>
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('active')">
+  <img id="lightbox-img" src="" alt="">
 </div>
 
 <div class="footer">
-  Art generated with <a href="https://deepmind.google/technologies/gemini/">Gemini AI</a> &middot; Curated by Laura Bennett<br>
-  <a href="https://github.com/laurabennett-boop/slay-the-spire-game-art">GitHub Repository</a> &middot; April 2, 2026
+  36 hand-painted dark fantasy assets with consistent style &middot; Generated with <a href="https://deepmind.google/technologies/gemini/">Gemini AI</a><br>
+  Curated by Laura Bennett &middot; <a href="https://github.com/laurabennett-boop/slay-the-spire-game-art">GitHub Repository</a> &middot; April 2, 2026
 </div>
+
+<script>
+function showLightbox(el) {
+  const img = el.querySelector('img');
+  if (!img) return;
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src = img.src;
+  lb.classList.add('active');
+}
+</script>
 
 </body>
 </html>
