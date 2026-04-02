@@ -237,11 +237,13 @@
 
   .anim-viewport img {
     position: absolute;
-    max-width: 85%;
-    max-height: 85%;
+    max-width: 92%;
+    max-height: 92%;
     object-fit: contain;
     opacity: 0;
-    transition: opacity 0.08s ease;
+    transition: opacity 0.15s ease-in-out;
+    image-rendering: auto;
+    will-change: opacity;
   }
 
   .anim-viewport img.active {
@@ -342,8 +344,8 @@
 
 <div class="global-controls">
   <button class="speed-btn" data-speed="1200" onclick="setGlobalSpeed(1200, this)">Slow</button>
-  <button class="speed-btn" data-speed="600" onclick="setGlobalSpeed(600, this)">Normal</button>
-  <button class="speed-btn active" data-speed="250" onclick="setGlobalSpeed(250, this)">Fast</button>
+  <button class="speed-btn active" data-speed="500" onclick="setGlobalSpeed(500, this)">Normal</button>
+  <button class="speed-btn" data-speed="250" onclick="setGlobalSpeed(250, this)">Fast</button>
   <button class="speed-btn" data-speed="120" onclick="setGlobalSpeed(120, this)">Turbo</button>
 </div>
 
@@ -481,17 +483,16 @@ const entities = {
   ]
 };
 
-let globalSpeed = 250;
+let globalSpeed = 500;
 const animators = {};
+let rafId = null;
+let lastTime = 0;
 
 function setGlobalSpeed(speed, btn) {
   globalSpeed = speed;
   document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  Object.values(animators).forEach(a => {
-    a.speed = speed;
-    if (a.playing) a.restart();
-  });
+  Object.values(animators).forEach(a => { a.speed = speed; });
 }
 
 function pad(n) { return String(n).padStart(2, '0'); }
@@ -503,6 +504,22 @@ function getFramePaths(entity, actionIndex) {
     paths.push(`${entity.basePath}/${action.name}_${pad(i)}.png`);
   }
   return paths;
+}
+
+// Central animation loop using requestAnimationFrame for smoothness
+function animationLoop(timestamp) {
+  Object.values(animators).forEach(a => {
+    if (!a.playing) return;
+    if (!a.lastTick) a.lastTick = timestamp;
+    const elapsed = timestamp - a.lastTick;
+    if (elapsed >= a.speed) {
+      a.lastTick = timestamp - (elapsed % a.speed);
+      const action = a.entity.actions[a.currentAction];
+      a.currentFrame = (a.currentFrame + 1) % action.frames;
+      updateDisplay(a.id);
+    }
+  });
+  rafId = requestAnimationFrame(animationLoop);
 }
 
 function createSpriteCard(entity, container) {
@@ -540,7 +557,7 @@ function createSpriteCard(entity, container) {
     <div class="anim-viewport" id="vp-${id}">
       <div class="loading-overlay" id="load-${id}">Loading frames...</div>
       ${allFrameImgs.map(f =>
-        `<img src="${f.src}" data-action="${f.actionIndex}" data-frame="${f.frameIndex}" alt="frame">`
+        `<img src="${f.src}" data-action="${f.actionIndex}" data-frame="${f.frameIndex}" alt="frame" loading="eager">`
       ).join('\n      ')}
     </div>
     <div class="frame-counter" id="fc-${id}">
@@ -556,25 +573,16 @@ function createSpriteCard(entity, container) {
 
   container.appendChild(card);
 
-  // Set up animator
-  const animator = {
+  // Set up animator state (no individual intervals - uses central rAF loop)
+  animators[id] = {
     id,
     entity,
     currentAction: 0,
     currentFrame: 0,
     playing: true,
     speed: globalSpeed,
-    interval: null,
-    restart() {
-      clearInterval(this.interval);
-      if (this.playing) {
-        this.interval = setInterval(() => advanceFrame(this.id), this.speed);
-      }
-    }
+    lastTick: 0,
   };
-
-  animator.interval = setInterval(() => advanceFrame(id), globalSpeed);
-  animators[id] = animator;
 
   // Check when first frame loads to hide loading overlay
   const firstImg = card.querySelector('.anim-viewport img');
@@ -593,14 +601,6 @@ function createSpriteCard(entity, container) {
   updateDisplay(id);
 }
 
-function advanceFrame(id) {
-  const a = animators[id];
-  if (!a) return;
-  const action = a.entity.actions[a.currentAction];
-  a.currentFrame = (a.currentFrame + 1) % action.frames;
-  updateDisplay(id);
-}
-
 function updateDisplay(id) {
   const a = animators[id];
   if (!a) return;
@@ -608,14 +608,12 @@ function updateDisplay(id) {
   const vp = document.getElementById('vp-' + id);
   if (!vp) return;
 
-  // Hide all images, show only the current action+frame
   vp.querySelectorAll('img').forEach(img => {
     const ai = parseInt(img.dataset.action);
     const fi = parseInt(img.dataset.frame);
     img.classList.toggle('active', ai === a.currentAction && fi === a.currentFrame);
   });
 
-  // Update frame counter
   const fc = document.getElementById('fc-' + id);
   if (fc) {
     const action = a.entity.actions[a.currentAction];
@@ -630,10 +628,9 @@ function switchAction(id, actionIndex) {
   if (!a) return;
   a.currentAction = actionIndex;
   a.currentFrame = 0;
+  a.lastTick = 0;
   updateDisplay(id);
-  if (a.playing) a.restart();
 
-  // Update tab highlights
   const tabs = document.getElementById('tabs-' + id);
   if (tabs) {
     tabs.querySelectorAll('.action-tab').forEach((tab, i) => {
@@ -656,14 +653,13 @@ function togglePlay(id) {
   const btn = document.getElementById('play-' + id);
 
   if (a.playing) {
-    clearInterval(a.interval);
     a.playing = false;
     btn.innerHTML = '&#9654;';
     btn.classList.remove('playing');
   } else {
     a.playing = true;
     a.speed = globalSpeed;
-    a.interval = setInterval(() => advanceFrame(id), globalSpeed);
+    a.lastTick = 0;
     btn.innerHTML = '&#9646;&#9646;';
     btn.classList.add('playing');
   }
@@ -676,6 +672,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!grid) return;
     list.forEach(e => createSpriteCard(e, grid));
   });
+  // Start the central animation loop
+  rafId = requestAnimationFrame(animationLoop);
 });
 </script>
 
