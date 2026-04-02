@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🗡️ Roguelike Card Game — Art Preview</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0f;
+    color: #e0d8c8;
+    font-family: 'Noto Sans SC', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(60, 20, 80, 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(20, 40, 80, 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(80, 20, 20, 0.2) 0%, transparent 50%);
+    z-index: -1;
+    animation: bgPulse 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes bgPulse {
+    0% { opacity: 0.6; }
+    100% { opacity: 1; }
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    position: relative;
+  }
+
+  .header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 3em;
+    font-weight: 900;
+    background: linear-gradient(135deg, #c9a84c, #f0d878, #c9a84c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+  }
+
+  .header .subtitle {
+    font-size: 1.1em;
+    color: #8a7f6f;
+    letter-spacing: 2px;
+    font-weight: 300;
+  }
+
+  .header .divider {
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+    margin: 24px auto 0;
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px;
+    margin: 0 auto 40px;
+    max-width: 600px;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Cinzel', serif;
+    font-size: 2em;
+    font-weight: 700;
+    color: #c9a84c;
+  }
+
+  .stat-label {
+    font-size: 0.8em;
+    color: #6a6358;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Characters section */
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8em;
+    text-align: center;
+    color: #c9a84c;
+    margin: 40px 0 30px;
+    position: relative;
+  }
+
+  .section-title::before,
+  .section-title::after {
+    content: '◆';
+    margin: 0 16px;
+    font-size: 0.5em;
+    vertical-align: middle;
+    opacity: 0.5;
+  }
+
+  /* Character cards */
+  .characters {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  .character-card {
+    background: linear-gradient(145deg, rgba(20, 18, 25, 0.9), rgba(15, 12, 20, 0.95));
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .character-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(201, 168, 76, 0.1);
+  }
+
+  .character-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+
+  .card-image {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+  }
+
+  .card-info {
+    padding: 28px 32px;
+  }
+
+  .card-number {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75em;
+    color: #5a5348;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .card-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6em;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .card-name-cn {
+    font-size: 1.1em;
+    color: #a09585;
+    margin-bottom: 16px;
+  }
+
+  .card-desc {
+    font-size: 0.95em;
+    line-height: 1.8;
+    color: #8a7f6f;
+  }
+
+  .card-tags {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    color: #c9a84c;
+    background: rgba(201, 168, 76, 0.05);
+  }
+
+  /* Roadmap section */
+  .roadmap {
+    max-width: 700px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+  }
+
+  .roadmap-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+  }
+
+  .roadmap-icon {
+    font-size: 1.4em;
+    flex-shrink: 0;
+    width: 36px;
+    text-align: center;
+  }
+
+  .roadmap-text {
+    flex: 1;
+  }
+
+  .roadmap-title {
+    font-weight: 700;
+    color: #c9a84c;
+    margin-bottom: 4px;
+  }
+
+  .roadmap-desc {
+    font-size: 0.85em;
+    color: #6a6358;
+  }
+
+  .status-done {
+    color: #4caf50;
+    font-size: 0.8em;
+    font-weight: 700;
+  }
+
+  .status-pending {
+    color: #5a5348;
+    font-size: 0.8em;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(201, 168, 76, 0.1);
+    color: #4a4540;
+    font-size: 0.85em;
+  }
+
+  .footer .heart { color: #c9a84c; }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    .header h1 { font-size: 1.8em; }
+    .stats-bar { gap: 20px; }
+    .card-info { padding: 20px; }
+    .card-name { font-size: 1.3em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>DARK SPIRE</h1>
+  <div class="subtitle">Roguelike Card Game — Art Preview</div>
+  <div class="divider"></div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-num">3</div>
+    <div class="stat-label">角色</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">0</div>
+    <div class="stat-label">怪物</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">0</div>
+    <div class="stat-label">卡牌</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">0</div>
+    <div class="stat-label">遗物</div>
+  </div>
+</div>
+
+<div class="section-title">PLAYABLE CHARACTERS</div>
+
+<div class="characters">
+
+  <div class="character-card" style="--accent: #4fc3f7;">
+    <img class="card-image" src="wanderer.jpg" alt="The Wanderer">
+    <div class="card-info">
+      <div class="card-number">Character I</div>
+      <div class="card-name">The Wanderer</div>
+      <div class="card-name-cn">流浪剑客</div>
+      <div class="card-desc">
+        神秘的蒙面剑客，身披破旧的暗蓝色斗篷，兜帽下隐约可见青色光芒的双眼。手持一柄锯齿状的水晶碎刃，一只手臂缠着微微发光的魔法绷带。<br>
+        <strong>流派：</strong>近战物理 + 结晶魔法。通过攻击积累「结晶」层数，消耗结晶释放强力技能。防御时可结晶化护甲。
+      </div>
+      <div class="card-tags">
+        <span class="tag">⚔️ 近战</span>
+        <span class="tag">💎 结晶</span>
+        <span class="tag">🛡️ 护甲</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="character-card" style="--accent: #66bb6a;">
+    <img class="card-image" src="alchemist.jpg" alt="The Alchemist">
+    <div class="card-info">
+      <div class="card-number">Character II</div>
+      <div class="card-name">The Alchemist</div>
+      <div class="card-name-cn">炼金术士</div>
+      <div class="card-desc">
+        驼背的疯狂科学家，穿着被彩色药水染污的厚重皮围裙，额头上推着护目镜，一头蓬乱的白发。背上的大背包里满是冒泡的烧瓶和药剂。一只手握着发光的绿色药剂，另一只是黄铜机械手指。<br>
+        <strong>流派：</strong>药水/毒素/化学反应。打出的药水牌会在回合结束时触发化学反应，产生连锁效果。可以混合不同颜色的药剂创造新效果。
+      </div>
+      <div class="card-tags">
+        <span class="tag">🧪 药水</span>
+        <span class="tag">☠️ 毒素</span>
+        <span class="tag">⚗️ 炼金</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="character-card" style="--accent: #ef5350;">
+    <img class="card-image" src="puppeteer.jpg" alt="The Puppeteer">
+    <div class="card-info">
+      <div class="card-number">Character III</div>
+      <div class="card-name">The Puppeteer</div>
+      <div class="card-name-cn">傀儡师</div>
+      <div class="card-desc">
+        优雅却令人不安的高挑身影，身着金色刺绣的深红长风衣。瓷白色的皮肤，空洞的黑暗双眼。纤细的指尖延伸出丝线，连接着周围漂浮的小型傀儡灵体。每个傀儡都有不同的能力。<br>
+        <strong>流派：</strong>召唤/操控。召唤傀儡为你战斗、格挡或施法。高级技能可以操控敌人，让敌人互相攻击。傀儡越多越强，但也越难控制。
+      </div>
+      <div class="card-tags">
+        <span class="tag">🎭 召唤</span>
+        <span class="tag">🕸️ 操控</span>
+        <span class="tag">👻 灵体</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-title">ROADMAP</div>
+
+<div class="roadmap">
+  <div class="roadmap-item">
+    <div class="roadmap-icon">⚔️</div>
+    <div class="roadmap-text">
+      <div class="roadmap-title">可选角色 <span class="status-done">✓ 已完成</span></div>
+      <div class="roadmap-desc">3个风格各异的主角概念设计</div>
+    </div>
+  </div>
+  <div class="roadmap-item">
+    <div class="roadmap-icon">👹</div>
+    <div class="roadmap-text">
+      <div class="roadmap-title">普通怪物 <span class="status-pending">待生成</span></div>
+      <div class="roadmap-desc">5-6个不同类型的普通敌人</div>
+    </div>
+  </div>
+  <div class="roadmap-item">
+    <div class="roadmap-icon">💀</div>
+    <div class="roadmap-text">
+      <div class="roadmap-title">精英 & Boss <span class="status-pending">待生成</span></div>
+      <div class="roadmap-desc">2-3个精英怪 + 2-3个Boss</div>
+    </div>
+  </div>
+  <div class="roadmap-item">
+    <div class="roadmap-icon">🃏</div>
+    <div class="roadmap-text">
+      <div class="roadmap-title">卡牌插画 <span class="status-pending">待生成</span></div>
+      <div class="roadmap-desc">攻击、技能、能力牌各5-6张</div>
+    </div>
+  </div>
+  <div class="roadmap-item">
+    <div class="roadmap-icon">🏔️</div>
+    <div class="roadmap-text">
+      <div class="roadmap-title">地图 & 场景 <span class="status-pending">待生成</span></div>
+      <div class="roadmap-desc">3-4个不同层级的背景场景</div>
+    </div>
+  </div>
+  <div class="roadmap-item">
+    <div class="roadmap-icon">🎖️</div>
+    <div class="roadmap-text">
+      <div class="roadmap-title">遗物图标 <span class="status-pending">待生成</span></div>
+      <div class="roadmap-desc">5-6个遗物的图标设计</div>
+    </div>
+  </div>
+  <div class="roadmap-item">
+    <div class="roadmap-icon">🖥️</div>
+    <div class="roadmap-text">
+      <div class="roadmap-title">UI 元素 <span class="status-pending">待生成</span></div>
+      <div class="roadmap-desc">血条、能量、卡背、按钮等界面素材</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  Art generated with Gemini <span class="heart">♦</span> Curated by Laura Bennett<br>
+  April 2, 2026
+</div>
+
+</body>
+</html>
