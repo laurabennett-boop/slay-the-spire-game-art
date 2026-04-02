@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DARK SPIRE — Animated Sprite Preview</title>
+<title>DARK SPIRE — Multi-Frame Sprite Animation</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700&display=swap');
 
@@ -79,7 +79,7 @@
     background: rgba(201,168,76,0.15);
   }
 
-  /* Controls */
+  /* Global Controls */
   .global-controls {
     display: flex;
     justify-content: center;
@@ -132,9 +132,9 @@
   /* Sprite grid */
   .sprite-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
     gap: 24px;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px 40px;
   }
@@ -188,6 +188,40 @@
   .badge-elite { background: rgba(201,168,76,0.15); color: #c9a84c; border: 1px solid rgba(201,168,76,0.4); }
   .badge-boss { background: rgba(239,83,80,0.15); color: #ef5350; border: 1px solid rgba(239,83,80,0.4); }
 
+  /* Action tabs */
+  .action-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 12px 4px;
+    flex-wrap: wrap;
+  }
+
+  .action-tab {
+    padding: 5px 14px;
+    border-radius: 14px;
+    font-size: 0.75em;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border: 1px solid rgba(201,168,76,0.2);
+    color: #6a6358;
+    background: transparent;
+    transition: all 0.3s;
+  }
+
+  .action-tab.active {
+    border-color: var(--accent, #c9a84c);
+    color: var(--accent, #c9a84c);
+    background: rgba(201,168,76,0.12);
+  }
+
+  .action-tab:hover {
+    border-color: rgba(201,168,76,0.5);
+    color: #c9a84c;
+  }
+
   /* Animation viewport */
   .anim-viewport {
     position: relative;
@@ -207,45 +241,26 @@
     max-height: 85%;
     object-fit: contain;
     opacity: 0;
-    transition: opacity 0.15s ease;
+    transition: opacity 0.08s ease;
   }
 
   .anim-viewport img.active {
     opacity: 1;
   }
 
-  /* Pose indicator */
-  .pose-indicator {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    padding: 12px;
-    flex-wrap: wrap;
-  }
-
-  .pose-dot {
-    padding: 4px 12px;
-    border-radius: 12px;
+  /* Frame counter */
+  .frame-counter {
+    text-align: center;
+    padding: 6px;
     font-size: 0.72em;
-    font-family: 'Cinzel', serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    border: 1px solid rgba(201,168,76,0.2);
     color: #6a6358;
-    background: transparent;
-    transition: all 0.3s;
+    font-family: monospace;
+    letter-spacing: 1px;
   }
 
-  .pose-dot.active {
-    border-color: var(--accent, #c9a84c);
+  .frame-counter .current-frame {
     color: var(--accent, #c9a84c);
-    background: rgba(201,168,76,0.1);
-  }
-
-  .pose-dot:hover {
-    border-color: rgba(201,168,76,0.5);
-    color: #c9a84c;
+    font-weight: 700;
   }
 
   /* Card controls */
@@ -253,7 +268,7 @@
     display: flex;
     justify-content: center;
     gap: 8px;
-    padding: 0 12px 14px;
+    padding: 4px 12px 14px;
   }
 
   .ctrl-btn {
@@ -282,6 +297,21 @@
     color: #c9a84c;
   }
 
+  /* Loading indicator */
+  .loading-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10,10,15,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6a6358;
+    font-size: 0.85em;
+    z-index: 10;
+  }
+
+  .loading-overlay.hidden { display: none; }
+
   .footer {
     text-align: center;
     padding: 40px 20px;
@@ -302,7 +332,7 @@
 
 <div class="header">
   <h1>DARK SPIRE</h1>
-  <div class="subtitle">Transparent PNG Sprite Animation Preview</div>
+  <div class="subtitle">Multi-Frame Sprite Animation Preview</div>
   <div class="divider"></div>
 </div>
 
@@ -312,85 +342,167 @@
 
 <div class="global-controls">
   <button class="speed-btn" data-speed="1200" onclick="setGlobalSpeed(1200, this)">Slow</button>
-  <button class="speed-btn active" data-speed="600" onclick="setGlobalSpeed(600, this)">Normal</button>
-  <button class="speed-btn" data-speed="300" onclick="setGlobalSpeed(300, this)">Fast</button>
-  <button class="speed-btn" data-speed="150" onclick="setGlobalSpeed(150, this)">Turbo</button>
+  <button class="speed-btn" data-speed="600" onclick="setGlobalSpeed(600, this)">Normal</button>
+  <button class="speed-btn active" data-speed="250" onclick="setGlobalSpeed(250, this)">Fast</button>
+  <button class="speed-btn" data-speed="120" onclick="setGlobalSpeed(120, this)">Turbo</button>
 </div>
 
 <!-- CHARACTERS -->
 <div class="section-title">PLAYABLE CHARACTERS</div>
-<div class="section-desc">4 animation frames: Idle / Attack / Defend / Hurt</div>
-
+<div class="section-desc">4 actions &times; 4 frames each &mdash; Idle / Attack / Defend / Hurt</div>
 <div class="sprite-grid" id="characters-grid"></div>
 
 <!-- BOSSES -->
 <div class="section-title">BOSSES</div>
-<div class="section-desc">4 animation frames: Idle / Attack / Charge / Death</div>
-
+<div class="section-desc">4 actions &times; 4 frames each &mdash; Idle / Attack / Charge / Death</div>
 <div class="sprite-grid" id="bosses-grid"></div>
 
 <!-- ELITES -->
 <div class="section-title">ELITE MONSTERS</div>
-<div class="section-desc">3 animation frames: Idle / Attack / Hurt</div>
-
+<div class="section-desc">3 actions &times; 3 frames each &mdash; Idle / Attack / Hurt</div>
 <div class="sprite-grid" id="elites-grid"></div>
 
 <!-- NORMAL MONSTERS -->
 <div class="section-title">NORMAL MONSTERS</div>
-<div class="section-desc">2 animation frames: Idle / Attack</div>
-
+<div class="section-desc">2 actions &times; 3 frames each &mdash; Idle / Attack</div>
 <div class="sprite-grid" id="normals-grid"></div>
 
 <div class="footer">
-  Transparent PNG sprites with frame animation preview &middot; Generated with <a href="https://deepmind.google/technologies/gemini/">Gemini AI</a><br>
+  Multi-frame sprite animation preview &middot; Generated with <a href="https://deepmind.google/technologies/gemini/">Gemini AI</a><br>
   Curated by Laura Bennett &middot; <a href="https://github.com/laurabennett-boop/slay-the-spire-game-art">GitHub Repository</a> &middot; April 2026
 </div>
 
 <script>
-// Entity definitions
+// Entity definitions with multi-frame actions
 const entities = {
   characters: [
     { name: "The Wanderer", cn: "流浪剑客", accent: "#4fc3f7", badge: "character",
-      path: "png/characters/wanderer", poses: ["idle", "attack", "defend", "hurt"] },
+      basePath: "png/characters/wanderer/frames",
+      actions: [
+        { name: "idle", frames: 4 },
+        { name: "attack", frames: 4 },
+        { name: "defend", frames: 4 },
+        { name: "hurt", frames: 4 }
+      ]
+    },
     { name: "The Alchemist", cn: "炼金术士", accent: "#66bb6a", badge: "character",
-      path: "png/characters/alchemist", poses: ["idle", "attack", "defend", "hurt"] },
+      basePath: "png/characters/alchemist/frames",
+      actions: [
+        { name: "idle", frames: 4 },
+        { name: "attack", frames: 4 },
+        { name: "defend", frames: 4 },
+        { name: "hurt", frames: 4 }
+      ]
+    },
     { name: "The Puppeteer", cn: "傀儡师", accent: "#ce93d8", badge: "character",
-      path: "png/characters/puppeteer", poses: ["idle", "attack", "defend", "hurt"] },
+      basePath: "png/characters/puppeteer/frames",
+      actions: [
+        { name: "idle", frames: 4 },
+        { name: "attack", frames: 4 },
+        { name: "defend", frames: 4 },
+        { name: "hurt", frames: 4 }
+      ]
+    },
   ],
   bosses: [
     { name: "The Timeless Wyrm", cn: "永恒龙蛇", accent: "#ef5350", badge: "boss",
-      path: "png/monsters/boss/timeless-wyrm", poses: ["idle", "attack", "charge", "death"] },
+      basePath: "png/monsters/boss/timeless-wyrm/frames",
+      actions: [
+        { name: "idle", frames: 4 },
+        { name: "attack", frames: 4 },
+        { name: "charge", frames: 4 },
+        { name: "death", frames: 4 }
+      ]
+    },
     { name: "The Hollow King", cn: "虚空骨王", accent: "#ab47bc", badge: "boss",
-      path: "png/monsters/boss/hollow-king", poses: ["idle", "attack", "charge", "death"] },
+      basePath: "png/monsters/boss/hollow-king/frames",
+      actions: [
+        { name: "idle", frames: 4 },
+        { name: "attack", frames: 4 },
+        { name: "charge", frames: 4 },
+        { name: "death", frames: 4 }
+      ]
+    },
   ],
   elites: [
     { name: "Molten Golem", cn: "熔岩石像", accent: "#ff7043", badge: "elite",
-      path: "png/monsters/elite/molten-golem", poses: ["idle", "attack", "hurt"] },
+      basePath: "png/monsters/elite/molten-golem/frames",
+      actions: [
+        { name: "idle", frames: 3 },
+        { name: "attack", frames: 3 },
+        { name: "hurt", frames: 3 }
+      ]
+    },
     { name: "Dark Enchantress", cn: "暗黑女巫", accent: "#ec407a", badge: "elite",
-      path: "png/monsters/elite/dark-enchantress", poses: ["idle", "attack", "hurt"] },
+      basePath: "png/monsters/elite/dark-enchantress/frames",
+      actions: [
+        { name: "idle", frames: 3 },
+        { name: "attack", frames: 3 },
+        { name: "hurt", frames: 3 }
+      ]
+    },
   ],
   normals: [
     { name: "Toxic Slime", cn: "腐蚀史莱姆", accent: "#8bc34a", badge: "normal",
-      path: "png/monsters/normal/toxic-slime", poses: ["idle", "attack"] },
+      basePath: "png/monsters/normal/toxic-slime/frames",
+      actions: [
+        { name: "idle", frames: 3 },
+        { name: "attack", frames: 3 }
+      ]
+    },
     { name: "Skeletal Knight", cn: "幽骨骑士", accent: "#78909c", badge: "normal",
-      path: "png/monsters/normal/skeletal-knight", poses: ["idle", "attack"] },
+      basePath: "png/monsters/normal/skeletal-knight/frames",
+      actions: [
+        { name: "idle", frames: 3 },
+        { name: "attack", frames: 3 }
+      ]
+    },
     { name: "Fungal Beast", cn: "菌蕈巨兽", accent: "#26a69a", badge: "normal",
-      path: "png/monsters/normal/fungal-beast", poses: ["idle", "attack"] },
+      basePath: "png/monsters/normal/fungal-beast/frames",
+      actions: [
+        { name: "idle", frames: 3 },
+        { name: "attack", frames: 3 }
+      ]
+    },
     { name: "Shadow Wraith", cn: "暗影幽灵", accent: "#7e57c2", badge: "normal",
-      path: "png/monsters/normal/shadow-wraith", poses: ["idle", "attack"] },
+      basePath: "png/monsters/normal/shadow-wraith/frames",
+      actions: [
+        { name: "idle", frames: 3 },
+        { name: "attack", frames: 3 }
+      ]
+    },
     { name: "Clockwork Automaton", cn: "发条机关人", accent: "#ffa726", badge: "normal",
-      path: "png/monsters/normal/clockwork-automaton", poses: ["idle", "attack"] },
+      basePath: "png/monsters/normal/clockwork-automaton/frames",
+      actions: [
+        { name: "idle", frames: 3 },
+        { name: "attack", frames: 3 }
+      ]
+    },
   ]
 };
 
-let globalSpeed = 600;
-const animators = [];
+let globalSpeed = 250;
+const animators = {};
 
 function setGlobalSpeed(speed, btn) {
   globalSpeed = speed;
   document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  animators.forEach(a => { if (a.playing) { a.speed = speed; a.restart(); } });
+  Object.values(animators).forEach(a => {
+    a.speed = speed;
+    if (a.playing) a.restart();
+  });
+}
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function getFramePaths(entity, actionIndex) {
+  const action = entity.actions[actionIndex];
+  const paths = [];
+  for (let i = 1; i <= action.frames; i++) {
+    paths.push(`${entity.basePath}/${action.name}_${pad(i)}.png`);
+  }
+  return paths;
 }
 
 function createSpriteCard(entity, container) {
@@ -398,7 +510,21 @@ function createSpriteCard(entity, container) {
   card.className = 'sprite-card';
   card.style.setProperty('--accent', entity.accent);
 
-  const id = entity.name.toLowerCase().replace(/[^a-z]/g, '-');
+  const id = entity.name.toLowerCase().replace(/[^a-z]/g, '-').replace(/-+/g, '-');
+
+  // Pre-build all frame images for all actions
+  const allFrameImgs = [];
+  entity.actions.forEach((action, ai) => {
+    const paths = getFramePaths(entity, ai);
+    paths.forEach((p, fi) => {
+      allFrameImgs.push({
+        actionIndex: ai,
+        frameIndex: fi,
+        src: p,
+        key: `${ai}-${fi}`
+      });
+    });
+  });
 
   card.innerHTML = `
     <div class="card-header">
@@ -406,20 +532,25 @@ function createSpriteCard(entity, container) {
       <h3>${entity.name}</h3>
       <span class="cn-name">${entity.cn}</span>
     </div>
-    <div class="anim-viewport" id="vp-${id}">
-      ${entity.poses.map((p, i) =>
-        `<img src="${entity.path}/${p}.png" alt="${p}" data-pose="${p}" class="${i === 0 ? 'active' : ''}">`
-      ).join('\n      ')}
-    </div>
-    <div class="pose-indicator" id="pi-${id}">
-      ${entity.poses.map((p, i) =>
-        `<span class="pose-dot ${i === 0 ? 'active' : ''}" data-index="${i}" onclick="jumpToPose('${id}', ${i})">${p}</span>`
+    <div class="action-tabs" id="tabs-${id}">
+      ${entity.actions.map((a, i) =>
+        `<span class="action-tab ${i === 0 ? 'active' : ''}" data-action="${i}" onclick="switchAction('${id}', ${i})">${a.name}</span>`
       ).join('')}
     </div>
+    <div class="anim-viewport" id="vp-${id}">
+      <div class="loading-overlay" id="load-${id}">Loading frames...</div>
+      ${allFrameImgs.map(f =>
+        `<img src="${f.src}" data-action="${f.actionIndex}" data-frame="${f.frameIndex}" alt="frame">`
+      ).join('\n      ')}
+    </div>
+    <div class="frame-counter" id="fc-${id}">
+      <span class="current-frame">1</span> / <span class="total-frames">${entity.actions[0].frames}</span>
+      &nbsp;&middot;&nbsp; <span class="action-label">${entity.actions[0].name.toUpperCase()}</span>
+    </div>
     <div class="card-controls">
-      <button class="ctrl-btn" onclick="stepPose('${id}', -1)" title="Previous">&#9664;</button>
+      <button class="ctrl-btn" onclick="stepFrame('${id}', -1)" title="Previous Frame">&#9664;</button>
       <button class="ctrl-btn playing" id="play-${id}" onclick="togglePlay('${id}')" title="Play/Pause">&#9646;&#9646;</button>
-      <button class="ctrl-btn" onclick="stepPose('${id}', 1)" title="Next">&#9654;</button>
+      <button class="ctrl-btn" onclick="stepFrame('${id}', 1)" title="Next Frame">&#9654;</button>
     </div>
   `;
 
@@ -428,8 +559,9 @@ function createSpriteCard(entity, container) {
   // Set up animator
   const animator = {
     id,
+    entity,
+    currentAction: 0,
     currentFrame: 0,
-    totalFrames: entity.poses.length,
     playing: true,
     speed: globalSpeed,
     interval: null,
@@ -442,57 +574,96 @@ function createSpriteCard(entity, container) {
   };
 
   animator.interval = setInterval(() => advanceFrame(id), globalSpeed);
-  animators.push(animator);
+  animators[id] = animator;
+
+  // Check when first frame loads to hide loading overlay
+  const firstImg = card.querySelector('.anim-viewport img');
+  if (firstImg) {
+    firstImg.onload = () => {
+      const overlay = document.getElementById('load-' + id);
+      if (overlay) overlay.classList.add('hidden');
+    };
+    firstImg.onerror = () => {
+      const overlay = document.getElementById('load-' + id);
+      if (overlay) overlay.textContent = 'Frames not yet available';
+    };
+  }
+
+  // Show first frame
+  updateDisplay(id);
 }
 
 function advanceFrame(id) {
-  const animator = animators.find(a => a.id === id);
-  if (!animator) return;
-  animator.currentFrame = (animator.currentFrame + 1) % animator.totalFrames;
-  updateDisplay(id, animator.currentFrame);
+  const a = animators[id];
+  if (!a) return;
+  const action = a.entity.actions[a.currentAction];
+  a.currentFrame = (a.currentFrame + 1) % action.frames;
+  updateDisplay(id);
 }
 
-function updateDisplay(id, frame) {
+function updateDisplay(id) {
+  const a = animators[id];
+  if (!a) return;
+
   const vp = document.getElementById('vp-' + id);
-  const pi = document.getElementById('pi-' + id);
-  if (!vp || !pi) return;
+  if (!vp) return;
 
-  vp.querySelectorAll('img').forEach((img, i) => {
-    img.classList.toggle('active', i === frame);
+  // Hide all images, show only the current action+frame
+  vp.querySelectorAll('img').forEach(img => {
+    const ai = parseInt(img.dataset.action);
+    const fi = parseInt(img.dataset.frame);
+    img.classList.toggle('active', ai === a.currentAction && fi === a.currentFrame);
   });
-  pi.querySelectorAll('.pose-dot').forEach((dot, i) => {
-    dot.classList.toggle('active', i === frame);
-  });
+
+  // Update frame counter
+  const fc = document.getElementById('fc-' + id);
+  if (fc) {
+    const action = a.entity.actions[a.currentAction];
+    fc.querySelector('.current-frame').textContent = a.currentFrame + 1;
+    fc.querySelector('.total-frames').textContent = action.frames;
+    fc.querySelector('.action-label').textContent = action.name.toUpperCase();
+  }
 }
 
-function jumpToPose(id, index) {
-  const animator = animators.find(a => a.id === id);
-  if (!animator) return;
-  animator.currentFrame = index;
-  updateDisplay(id, index);
+function switchAction(id, actionIndex) {
+  const a = animators[id];
+  if (!a) return;
+  a.currentAction = actionIndex;
+  a.currentFrame = 0;
+  updateDisplay(id);
+  if (a.playing) a.restart();
+
+  // Update tab highlights
+  const tabs = document.getElementById('tabs-' + id);
+  if (tabs) {
+    tabs.querySelectorAll('.action-tab').forEach((tab, i) => {
+      tab.classList.toggle('active', i === actionIndex);
+    });
+  }
 }
 
-function stepPose(id, dir) {
-  const animator = animators.find(a => a.id === id);
-  if (!animator) return;
-  animator.currentFrame = (animator.currentFrame + dir + animator.totalFrames) % animator.totalFrames;
-  updateDisplay(id, animator.currentFrame);
+function stepFrame(id, dir) {
+  const a = animators[id];
+  if (!a) return;
+  const action = a.entity.actions[a.currentAction];
+  a.currentFrame = (a.currentFrame + dir + action.frames) % action.frames;
+  updateDisplay(id);
 }
 
 function togglePlay(id) {
-  const animator = animators.find(a => a.id === id);
-  if (!animator) return;
+  const a = animators[id];
+  if (!a) return;
   const btn = document.getElementById('play-' + id);
 
-  if (animator.playing) {
-    clearInterval(animator.interval);
-    animator.playing = false;
+  if (a.playing) {
+    clearInterval(a.interval);
+    a.playing = false;
     btn.innerHTML = '&#9654;';
     btn.classList.remove('playing');
   } else {
-    animator.playing = true;
-    animator.speed = globalSpeed;
-    animator.interval = setInterval(() => advanceFrame(id), globalSpeed);
+    a.playing = true;
+    a.speed = globalSpeed;
+    a.interval = setInterval(() => advanceFrame(id), globalSpeed);
     btn.innerHTML = '&#9646;&#9646;';
     btn.classList.add('playing');
   }
