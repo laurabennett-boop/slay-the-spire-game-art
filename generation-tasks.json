@@ -1,0 +1,397 @@
+{
+  "style_prefix": "Dark fantasy card game art, Slay the Spire style. Thick black ink outlines, hand-painted watercolor texture, muted dark color palette with teal and crimson accents, dramatic side lighting. Transparent background, isolated character sprite, no ground, no environment, no shadow on ground, full body visible, game sprite asset.",
+  "entities": {
+    "wanderer": {
+      "name": "The Wanderer",
+      "visual": "A lone swordsman in tattered dark cloak, lean muscular build, wielding a chipped longsword, bandaged arms, glowing teal eyes under a wide-brimmed hat, scarred face",
+      "base_path": "png/characters/wanderer/frames",
+      "actions": {
+        "idle": {
+          "frames": 4,
+          "descriptions": [
+            "standing relaxed, sword held loosely at side, slight forward lean, calm breathing pose",
+            "weight shifting to left foot, sword tip angled slightly up, cloak swaying gently left",
+            "centered balanced stance, sword at rest, eyes scanning forward, neutral posture",
+            "weight shifting to right foot, sword tip angled slightly down, cloak swaying gently right"
+          ]
+        },
+        "attack": {
+          "frames": 4,
+          "descriptions": [
+            "winding up for sword slash, sword pulled back behind right shoulder, body coiled, weight on back foot",
+            "mid-swing, sword arcing forward at chest height, body rotating, aggressive forward lean",
+            "full extension slash, sword fully extended forward, maximum reach, lunging stance",
+            "follow-through recovery, sword past center line sweeping left, body unwinding, returning to stance"
+          ]
+        },
+        "defend": {
+          "frames": 4,
+          "descriptions": [
+            "raising sword to guard position, blade angling upward, weight centering, bracing stance beginning",
+            "full defensive block, sword held vertically in front, both hands on hilt, knees bent, solid guard",
+            "absorbing impact on blade, slight pushback, sparks on sword edge, gritting teeth, holding firm",
+            "lowering guard, sword returning to side, relaxing from block stance, exhaling"
+          ]
+        },
+        "hurt": {
+          "frames": 4,
+          "descriptions": [
+            "moment of impact, head snapping back, body jolting from hit, pain expression",
+            "staggering backward, one arm clutching wound, sword dropping low, off-balance",
+            "deep recoil, bent over slightly, grimacing in pain, one knee dipping",
+            "recovering from hit, straightening up, gripping sword tighter, determined expression"
+          ]
+        }
+      }
+    },
+    "alchemist": {
+      "name": "The Alchemist",
+      "visual": "A robed alchemist with goggles pushed up on forehead, leather apron over dark green robes, belt of glass vials and flasks glowing with colored liquids, wild silver-streaked hair, chemical-stained gloves",
+      "base_path": "png/characters/alchemist/frames",
+      "actions": {
+        "idle": {
+          "frames": 4,
+          "descriptions": [
+            "standing with a bubbling flask in right hand, left hand at belt, curious expression, slight lean forward examining flask",
+            "swirling flask gently, liquid glowing green, left hand touching chin thoughtfully, upright posture",
+            "holding flask at waist level, both hands relaxed, calm neutral stance, vapors rising from flask",
+            "raising flask slightly, tilting head, studying the liquid with interest, weight on right foot"
+          ]
+        },
+        "attack": {
+          "frames": 4,
+          "descriptions": [
+            "pulling a volatile flask from belt with right hand, arm pulling back to throw, determined expression, left hand steadying belt",
+            "mid-throw motion, arm sweeping forward, flask leaving hand, liquid trailing, aggressive stance",
+            "flask released, arm fully extended forward, watching projectile, chemicals splashing in air ahead",
+            "follow-through after throw, arm completing arc, reaching for next flask from belt, ready stance"
+          ]
+        },
+        "defend": {
+          "frames": 4,
+          "descriptions": [
+            "quickly pulling a shield-flask from belt, raising it defensively, chemical barrier forming",
+            "full defensive pose, glowing chemical shield in front, crouching behind shimmering barrier, determined",
+            "barrier absorbing hit, shield-flask cracking, sparks of chemical reaction, bracing behind it",
+            "barrier fading, lowering flask, smoke dissipating, returning to standing position"
+          ]
+        },
+        "hurt": {
+          "frames": 4,
+          "descriptions": [
+            "hit by attack, flasks rattling on belt, goggles askew, body jerking from impact",
+            "stumbling back, a flask falling from belt and shattering, chemicals spilling, pained expression",
+            "doubled over, clutching side, broken glass on ground, grimacing, goggles hanging off one ear",
+            "recovering, pushing goggles back up, steadying self, reaching for another flask"
+          ]
+        }
+      }
+    },
+    "puppeteer": {
+      "name": "The Puppeteer",
+      "visual": "An elegant figure in a flowing purple-black Victorian coat, porcelain mask covering half the face, long thin fingers with glowing thread-like strings extending from fingertips, puppet marionette cross-bar in one hand, ethereal puppet spirits floating nearby",
+      "base_path": "png/characters/puppeteer/frames",
+      "actions": {
+        "idle": {
+          "frames": 4,
+          "descriptions": [
+            "standing gracefully, fingers extended with faint glowing strings, marionette cross floating beside, calm masked expression",
+            "fingers twitching slightly, strings pulsing with dim light, small puppet spirit drifting left, relaxed stance",
+            "shifting weight elegantly, coat swaying, strings dimming then brightening, poised posture",
+            "tilting head slightly, fingers curling then extending, strings shimmering, contemplative masked gaze"
+          ]
+        },
+        "attack": {
+          "frames": 4,
+          "descriptions": [
+            "raising both hands, strings glowing bright purple, fingers spread wide, puppet spirits gathering, commanding pose",
+            "thrusting hands forward, strings shooting outward like whips, aggressive commanding gesture, coat billowing",
+            "strings at full extension striking forward, puppet spirits lunging, fingers pulling tight, maximum control",
+            "retracting strings, hands pulling back, puppet spirits returning, fingers closing, recovering control"
+          ]
+        },
+        "defend": {
+          "frames": 4,
+          "descriptions": [
+            "crossing arms before chest, strings forming a web-like shield, puppet spirits circling protectively",
+            "full string barrier, web of glowing threads in front, crouching slightly behind string shield, focused",
+            "barrier catching attack, strings vibrating intensely, sparks where impact hits, maintaining concentration",
+            "lowering string barrier, arms uncrossing, strings retracting to fingers, standing upright again"
+          ]
+        },
+        "hurt": {
+          "frames": 4,
+          "descriptions": [
+            "struck, mask cracking slightly, strings snapping and flailing, body jerking from impact",
+            "staggering, puppet spirits scattering, some strings going limp, losing control momentarily",
+            "bent forward, mask showing damage, frantically trying to re-establish string connections, pained",
+            "recovering, strings reconnecting one by one, puppet spirits returning, mask still cracked but standing firm"
+          ]
+        }
+      }
+    },
+    "timeless-wyrm": {
+      "name": "The Timeless Wyrm",
+      "visual": "A massive serpentine dragon with an ancient skeletal face, body covered in crumbling stone scales and glowing teal runes, multiple pairs of vestigial wings along its length, hourglass embedded in chest cavity, sand flowing through translucent segments",
+      "base_path": "png/monsters/boss/timeless-wyrm/frames",
+      "actions": {
+        "idle": {
+          "frames": 4,
+          "descriptions": [
+            "coiled serpentine body, head raised high, teal runes glowing dimly, sand trickling in hourglass chest, watchful ancient gaze",
+            "slight undulation of body, runes pulsing brighter, vestigial wings twitching, sand flowing steadily",
+            "head swaying slowly left, body shifting coils, runes dimming, ancient eyes half-closed, resting but alert",
+            "head swaying right, runes brightening again, small stones crumbling from scales, hourglass sand reversing"
+          ]
+        },
+        "attack": {
+          "frames": 4,
+          "descriptions": [
+            "rearing back, body uncoiling, jaws opening wide revealing void inside mouth, runes blazing teal, preparing to strike",
+            "lunging forward with tremendous force, jaws snapping, body fully extended, wings spread, runes streaming light",
+            "bite at full extension, massive jaws closed around target area, body at maximum stretch, devastating impact",
+            "recoiling after bite, pulling head back, body re-coiling, jaws closing, runes fading from peak intensity"
+          ]
+        },
+        "charge": {
+          "frames": 4,
+          "descriptions": [
+            "body tightening, runes beginning to glow intensely, hourglass sand swirling faster, gathering temporal energy",
+            "runes blazing bright teal, energy crackling along body, sand in hourglass spinning, wings vibrating with power",
+            "peak charge, entire body radiating teal light, runes at maximum brightness, sand frozen mid-air in hourglass, terrifying power",
+            "energy pulse releasing from body, shockwave of teal light, runes flickering, sand resuming flow, power unleashed"
+          ]
+        },
+        "death": {
+          "frames": 4,
+          "descriptions": [
+            "struck fatally, body convulsing, runes flickering wildly, cracks forming in stone scales, hourglass cracking",
+            "collapsing, body going limp section by section, runes going dark one by one, wings folding, sand spilling from cracked hourglass",
+            "body crumbled to ground, most runes dark, only faint glow remaining, stone scales breaking apart, sand pooling",
+            "final moment, body dissolving into teal particles and sand, only hourglass remains intact on ground, fading glow"
+          ]
+        }
+      }
+    },
+    "hollow-king": {
+      "name": "The Hollow King",
+      "visual": "A towering skeletal monarch in rusted ornate armor, a broken crown floating above empty skull, ribcage exposed and containing a swirling crimson void, tattered royal cape, wielding a massive corroded greatsword, ghostly crimson flames in eye sockets",
+      "base_path": "png/monsters/boss/hollow-king/frames",
+      "actions": {
+        "idle": {
+          "frames": 4,
+          "descriptions": [
+            "standing imposingly, greatsword planted in ground, one skeletal hand on pommel, crimson eye flames steady, cape still",
+            "crimson void in ribcage pulsing, eye flames flickering, cape shifting slightly, crown rotating slowly above skull",
+            "shifting grip on greatsword, void swirling faster, subtle lean forward as if sizing up prey, menacing presence",
+            "settling back, void calming, eye flames dimming then brightening, crown stabilizing, kingly stillness"
+          ]
+        },
+        "attack": {
+          "frames": 4,
+          "descriptions": [
+            "wrenching greatsword from ground, both skeletal hands gripping hilt, raising overhead, crimson flames intensifying, cape flying back",
+            "mid-swing, greatsword arcing downward with tremendous force, body leaning into strike, void blazing in chest",
+            "greatsword smashing down at full force, massive impact, crimson shockwave from blade, devastating overhead cleave",
+            "pulling greatsword back up from strike, body straightening, crimson energy dissipating, returning to stance"
+          ]
+        },
+        "charge": {
+          "frames": 4,
+          "descriptions": [
+            "planting greatsword, raising both arms, crimson void expanding from ribcage, summoning dark energy, crown glowing",
+            "void tendrils extending from chest, crimson energy swirling around body, cape whipping in supernatural wind, growing power",
+            "maximum crimson energy, entire body wreathed in dark flames, void fully open, crown blazing, terrifying power display",
+            "releasing energy blast, void collapsing inward then exploding outward, crimson shockwave, cape shredding, devastating release"
+          ]
+        },
+        "death": {
+          "frames": 4,
+          "descriptions": [
+            "dealt killing blow, armor cracking, crimson void destabilizing, staggering, greatsword falling from grip",
+            "collapsing to one knee, armor pieces falling off, void imploding, crown descending toward skull, eye flames sputtering",
+            "fallen to ground, armor scattered, void gone, only faint crimson wisps, crown landed beside skull, greatsword shattered",
+            "final dissolution, bones crumbling to dust, crown tarnishing and cracking, last crimson flame extinguishing, only dust remains"
+          ]
+        }
+      }
+    },
+    "molten-golem": {
+      "name": "Molten Golem",
+      "visual": "A hulking rock creature with cracks revealing molten lava core, obsidian and basalt body, one arm is a massive stone fist, the other ends in a magma-dripping club, glowing orange eyes, steam venting from joints",
+      "base_path": "png/monsters/elite/molten-golem/frames",
+      "actions": {
+        "idle": {
+          "frames": 3,
+          "descriptions": [
+            "standing heavy, magma dripping from club arm, lava glowing in body cracks, steam rising from joints, solid stance",
+            "shifting weight, cracks brightening with lava flow, steam puff from shoulder, magma pooling at club tip",
+            "settling back, lava dimming slightly in cracks, stone fist clenching and unclenching, rumbling presence"
+          ]
+        },
+        "attack": {
+          "frames": 3,
+          "descriptions": [
+            "raising magma club high overhead, lava flowing faster through cracks, body glowing orange, winding up",
+            "smashing club down with tremendous force, lava splashing on impact, full body committed to strike, devastating blow",
+            "recovering from smash, pulling club back up, lava settling, steam explosion from joints, returning to stance"
+          ]
+        },
+        "hurt": {
+          "frames": 3,
+          "descriptions": [
+            "struck hard, chunks of rock flying off body, lava spurting from new cracks, staggering",
+            "reeling, body fracturing further, magma leaking from wounds, one knee buckling, stone crumbling",
+            "stabilizing, cracks sealing with cooling lava, reforming damaged sections, angry glowing eyes"
+          ]
+        }
+      }
+    },
+    "dark-enchantress": {
+      "name": "Dark Enchantress",
+      "visual": "A floating witch in layered black and violet robes, long white hair streaming upward defying gravity, hands wreathed in dark purple magic, eyes glowing solid white, ornate dark staff with a cracked crystal orb, runic circles orbiting around her",
+      "base_path": "png/monsters/elite/dark-enchantress/frames",
+      "actions": {
+        "idle": {
+          "frames": 3,
+          "descriptions": [
+            "floating serenely, hair drifting upward, runic circles rotating slowly, staff held loosely, faint purple aura",
+            "hair shifting direction, runic circles pulsing, staff crystal flickering, hands with idle purple sparks",
+            "slight rotation in place, robes flowing, runes dimming then brightening, contemplative floating pose"
+          ]
+        },
+        "attack": {
+          "frames": 3,
+          "descriptions": [
+            "thrusting staff forward, crystal blazing purple, runic circles spinning fast, dark energy gathering at staff tip",
+            "releasing dark magic blast, beam of purple-black energy from staff, hair blown back by force, devastating spell",
+            "spell dissipating, pulling staff back, runic circles reforming, energy fading, floating back into position"
+          ]
+        },
+        "hurt": {
+          "frames": 3,
+          "descriptions": [
+            "hit by attack, runic circles shattering, hair falling momentarily, losing float height, pained expression",
+            "tumbling in air, staff nearly dropped, robes tangled, white eyes flickering, trying to stabilize",
+            "recovering float, hair rising again, reforming runic circles one by one, gripping staff tightly"
+          ]
+        }
+      }
+    },
+    "toxic-slime": {
+      "name": "Toxic Slime",
+      "visual": "A large amorphous blob of translucent toxic green slime, darker nucleus visible inside, bubbles forming and popping on surface, acidic puddle beneath, small bones and debris dissolved inside",
+      "base_path": "png/monsters/normal/toxic-slime/frames",
+      "actions": {
+        "idle": {
+          "frames": 3,
+          "descriptions": [
+            "resting blob shape, bubbles forming on surface, nucleus floating center, gentle wobble, acid dripping",
+            "slight expansion, surface rippling, nucleus shifting upward, new bubbles popping, amorphous stretch",
+            "contracting back, surface smoothing, nucleus settling, wobbling back to round shape"
+          ]
+        },
+        "attack": {
+          "frames": 3,
+          "descriptions": [
+            "compressing body, pulling back, nucleus glowing brighter, surface tension increasing, about to launch",
+            "launching forward, body stretching into projectile shape, toxic spray shooting ahead, aggressive lunge",
+            "splatting at full extension, body reforming from stretched shape, toxic residue dripping, pulling back together"
+          ]
+        }
+      }
+    },
+    "skeletal-knight": {
+      "name": "Skeletal Knight",
+      "visual": "An animated skeleton in dented medieval plate armor, rusted sword and battered shield, one shoulder pauldron missing, jaw wired shut, blue ghostly flames in eye sockets, tattered tabard",
+      "base_path": "png/monsters/normal/skeletal-knight/frames",
+      "actions": {
+        "idle": {
+          "frames": 3,
+          "descriptions": [
+            "standing guard, shield raised at chest, sword at ready, blue eye flames steady, tattered tabard hanging still",
+            "shifting weight on bony legs, shield adjusting position, jaw rattling, eye flames flickering",
+            "settling into stance, sword raised slightly, shield firm, bones creaking into position"
+          ]
+        },
+        "attack": {
+          "frames": 3,
+          "descriptions": [
+            "lunging forward, sword pulled back for thrust, shield dropped to side, blue eye flames blazing, aggressive",
+            "thrusting sword forward, full extension, skeletal body committed to attack, bones rattling with force",
+            "pulling back from thrust, sword returning, shield coming back up, rattling into guard stance"
+          ]
+        }
+      }
+    },
+    "fungal-beast": {
+      "name": "Fungal Beast",
+      "visual": "A bear-sized quadruped creature entirely covered in mushrooms and fungal growths, glowing teal bioluminescent spots, spore clouds puffing from cap-like growths on back, mossy fur underneath, mycelium tendrils for feet",
+      "base_path": "png/monsters/normal/fungal-beast/frames",
+      "actions": {
+        "idle": {
+          "frames": 3,
+          "descriptions": [
+            "standing on four mycelium legs, spore puffs drifting upward, bioluminescent spots glowing steadily, calm beast",
+            "shifting weight, mushroom caps on back swelling slightly, more spores releasing, teal glow pulsing",
+            "settling, spores calming, bioluminescence dimming then brightening, mossy fur rippling"
+          ]
+        },
+        "attack": {
+          "frames": 3,
+          "descriptions": [
+            "rearing up on back legs, front mycelium tendrils raised to strike, mushroom caps flaring, spore explosion building",
+            "slamming down with front legs, massive spore cloud erupting, tendrils smashing, bioluminescence blazing",
+            "recovering from slam, spore cloud dissipating, pulling up from ground, mushrooms resettling"
+          ]
+        }
+      }
+    },
+    "shadow-wraith": {
+      "name": "Shadow Wraith",
+      "visual": "A ghostly humanoid figure of pure shadow and dark smoke, tattered shadow robes, no visible face except two glowing purple eye points, elongated clawed hands, trailing wispy shadow tendrils, partially transparent",
+      "base_path": "png/monsters/normal/shadow-wraith/frames",
+      "actions": {
+        "idle": {
+          "frames": 3,
+          "descriptions": [
+            "floating, shadow form rippling, eye points glowing steady purple, tendrils drifting slowly, ethereal presence",
+            "form shifting, becoming more solid then transparent, eye points flickering, shadow tendrils swirling",
+            "stabilizing, shadow robes billowing in unseen wind, clawed hands slowly flexing, ominous hover"
+          ]
+        },
+        "attack": {
+          "frames": 3,
+          "descriptions": [
+            "lunging forward, shadow form stretching thin, clawed hands reaching out, eye points blazing, tendrils shooting ahead",
+            "claws slashing through space, shadow form at maximum extension, dark energy trailing from claws, devastating swipe",
+            "retracting, shadow form condensing back, claws pulling in, tendrils recoiling, reforming shape"
+          ]
+        }
+      }
+    },
+    "clockwork-automaton": {
+      "name": "Clockwork Automaton",
+      "visual": "A humanoid brass and copper robot with exposed gears and clockwork mechanisms, one large telescoping eye lens, steam pipes on back, one arm ends in a rotating sawblade, other arm has pincers, wind-up key in back",
+      "base_path": "png/monsters/normal/clockwork-automaton/frames",
+      "actions": {
+        "idle": {
+          "frames": 3,
+          "descriptions": [
+            "standing mechanical, gears turning visibly, steam puffing from back pipes, eye lens focusing, sawblade idling, steady",
+            "gears shifting, eye lens adjusting zoom, sawblade spinning slightly faster then slower, steam venting, mechanical whir",
+            "settling, key in back rotating one tick, pistons cycling, pincers opening and closing, returning to ready state"
+          ]
+        },
+        "attack": {
+          "frames": 3,
+          "descriptions": [
+            "sawblade arm revving up, spinning fast, steam pressure building, eye lens locking on target, pistons charging, leaning forward",
+            "slashing with sawblade arm at full speed, sparks flying, steam explosion from joints, maximum mechanical force, lunging strike",
+            "sawblade slowing, pulling arm back, steam settling, gears clicking back into neutral, resuming mechanical idle"
+          ]
+        }
+      }
+    }
+  }
+}
