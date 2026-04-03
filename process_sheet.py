@@ -12,20 +12,33 @@ BOTTOM_PAD = 0.03
 
 
 def detect_layout(img, num_frames):
-    """Detect if sprite sheet is horizontal strip or grid by checking for white bands."""
+    """Detect sprite sheet layout by checking for white bands between rows."""
     w, h = img.size
     arr = np.array(img)
 
+    def has_horizontal_white_band(y_center, search_range=30):
+        """Check if there's a white band near the given y position."""
+        # Search a range around the expected split point
+        for y in range(max(0, y_center - search_range), min(h, y_center + search_range)):
+            row_white = np.mean(arr[y, :, :] > 230)
+            if row_white > 0.95:
+                return True
+        return False
+
     if num_frames == 4:
-        # Check if there's a horizontal white band in the middle (= 2x2 grid)
-        mid_band = arr[h//2-10:h//2+10, :, :]
-        mid_white_ratio = np.mean(mid_band > 230)
-        if mid_white_ratio > 0.8:
-            return (2, 2)  # 2x2 grid (white gap between rows)
-        else:
-            return (1, 4)  # horizontal strip
+        if has_horizontal_white_band(h // 2):
+            return (2, 2)
+        return (1, 4)
+    elif num_frames == 6:
+        if has_horizontal_white_band(h // 2):
+            return (2, 3)
+        return (1, 6)
+    elif num_frames == 8:
+        if has_horizontal_white_band(h // 2):
+            return (2, 4)
+        return (1, 8)
     elif num_frames == 3:
-        return (1, 3)  # 3-frame sheets are always horizontal
+        return (1, 3)
     return (1, num_frames)
 
 

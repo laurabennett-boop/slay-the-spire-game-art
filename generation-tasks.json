@@ -7,7 +7,7 @@
       "base_path": "png/characters/wanderer/frames",
       "actions": {
         "idle": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "standing relaxed, sword held loosely at side, slight forward lean, calm breathing pose",
             "weight shifting to left foot, sword tip angled slightly up, cloak swaying gently left",
@@ -16,7 +16,7 @@
           ]
         },
         "attack": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "winding up for sword slash, sword pulled back behind right shoulder, body coiled, weight on back foot",
             "mid-swing, sword arcing forward at chest height, body rotating, aggressive forward lean",
@@ -25,7 +25,7 @@
           ]
         },
         "defend": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "raising sword to guard position, blade angling upward, weight centering, bracing stance beginning",
             "full defensive block, sword held vertically in front, both hands on hilt, knees bent, solid guard",
@@ -50,7 +50,7 @@
       "base_path": "png/characters/alchemist/frames",
       "actions": {
         "idle": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "standing with a bubbling flask in right hand, left hand at belt, curious expression, slight lean forward examining flask",
             "swirling flask gently, liquid glowing green, left hand touching chin thoughtfully, upright posture",
@@ -59,7 +59,7 @@
           ]
         },
         "attack": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "pulling a volatile flask from belt with right hand, arm pulling back to throw, determined expression, left hand steadying belt",
             "mid-throw motion, arm sweeping forward, flask leaving hand, liquid trailing, aggressive stance",
@@ -68,7 +68,7 @@
           ]
         },
         "defend": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "quickly pulling a shield-flask from belt, raising it defensively, chemical barrier forming",
             "full defensive pose, glowing chemical shield in front, crouching behind shimmering barrier, determined",
@@ -93,7 +93,7 @@
       "base_path": "png/characters/puppeteer/frames",
       "actions": {
         "idle": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "standing gracefully, fingers extended with faint glowing strings, marionette cross floating beside, calm masked expression",
             "fingers twitching slightly, strings pulsing with dim light, small puppet spirit drifting left, relaxed stance",
@@ -102,7 +102,7 @@
           ]
         },
         "attack": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "raising both hands, strings glowing bright purple, fingers spread wide, puppet spirits gathering, commanding pose",
             "thrusting hands forward, strings shooting outward like whips, aggressive commanding gesture, coat billowing",
@@ -111,7 +111,7 @@
           ]
         },
         "defend": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "crossing arms before chest, strings forming a web-like shield, puppet spirits circling protectively",
             "full string barrier, web of glowing threads in front, crouching slightly behind string shield, focused",
@@ -136,7 +136,7 @@
       "base_path": "png/monsters/boss/timeless-wyrm/frames",
       "actions": {
         "idle": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "coiled serpentine body, head raised high, teal runes glowing dimly, sand trickling in hourglass chest, watchful ancient gaze",
             "slight undulation of body, runes pulsing brighter, vestigial wings twitching, sand flowing steadily",
@@ -145,7 +145,7 @@
           ]
         },
         "attack": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "rearing back, body uncoiling, jaws opening wide revealing void inside mouth, runes blazing teal, preparing to strike",
             "lunging forward with tremendous force, jaws snapping, body fully extended, wings spread, runes streaming light",
@@ -154,7 +154,7 @@
           ]
         },
         "charge": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "body tightening, runes beginning to glow intensely, hourglass sand swirling faster, gathering temporal energy",
             "runes blazing bright teal, energy crackling along body, sand in hourglass spinning, wings vibrating with power",
@@ -163,7 +163,7 @@
           ]
         },
         "death": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "struck fatally, body convulsing, runes flickering wildly, cracks forming in stone scales, hourglass cracking",
             "collapsing, body going limp section by section, runes going dark one by one, wings folding, sand spilling from cracked hourglass",
@@ -179,7 +179,7 @@
       "base_path": "png/monsters/boss/hollow-king/frames",
       "actions": {
         "idle": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "standing imposingly, greatsword planted in ground, one skeletal hand on pommel, crimson eye flames steady, cape still",
             "crimson void in ribcage pulsing, eye flames flickering, cape shifting slightly, crown rotating slowly above skull",
@@ -188,7 +188,7 @@
           ]
         },
         "attack": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "wrenching greatsword from ground, both skeletal hands gripping hilt, raising overhead, crimson flames intensifying, cape flying back",
             "mid-swing, greatsword arcing downward with tremendous force, body leaning into strike, void blazing in chest",
@@ -197,7 +197,7 @@
           ]
         },
         "charge": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "planting greatsword, raising both arms, crimson void expanding from ribcage, summoning dark energy, crown glowing",
             "void tendrils extending from chest, crimson energy swirling around body, cape whipping in supernatural wind, growing power",
@@ -206,7 +206,7 @@
           ]
         },
         "death": {
-          "frames": 4,
+          "frames": 8,
           "descriptions": [
             "dealt killing blow, armor cracking, crimson void destabilizing, staggering, greatsword falling from grip",
             "collapsing to one knee, armor pieces falling off, void imploding, crown descending toward skull, eye flames sputtering",
@@ -222,7 +222,7 @@
       "base_path": "png/monsters/elite/molten-golem/frames",
       "actions": {
         "idle": {
-          "frames": 3,
+          "frames": 6,
           "descriptions": [
             "standing heavy, magma dripping from club arm, lava glowing in body cracks, steam rising from joints, solid stance",
             "shifting weight, cracks brightening with lava flow, steam puff from shoulder, magma pooling at club tip",
@@ -230,7 +230,7 @@
           ]
         },
         "attack": {
-          "frames": 3,
+          "frames": 8,
           "descriptions": [
             "raising magma club high overhead, lava flowing faster through cracks, body glowing orange, winding up",
             "smashing club down with tremendous force, lava splashing on impact, full body committed to strike, devastating blow",
@@ -238,7 +238,7 @@
           ]
         },
         "hurt": {
-          "frames": 3,
+          "frames": 4,
           "descriptions": [
             "struck hard, chunks of rock flying off body, lava spurting from new cracks, staggering",
             "reeling, body fracturing further, magma leaking from wounds, one knee buckling, stone crumbling",
@@ -253,7 +253,7 @@
       "base_path": "png/monsters/elite/dark-enchantress/frames",
       "actions": {
         "idle": {
-          "frames": 3,
+          "frames": 6,
           "descriptions": [
             "floating serenely, hair drifting upward, runic circles rotating slowly, staff held loosely, faint purple aura",
             "hair shifting direction, runic circles pulsing, staff crystal flickering, hands with idle purple sparks",
@@ -261,7 +261,7 @@
           ]
         },
         "attack": {
-          "frames": 3,
+          "frames": 8,
           "descriptions": [
             "thrusting staff forward, crystal blazing purple, runic circles spinning fast, dark energy gathering at staff tip",
             "releasing dark magic blast, beam of purple-black energy from staff, hair blown back by force, devastating spell",
@@ -269,7 +269,7 @@
           ]
         },
         "hurt": {
-          "frames": 3,
+          "frames": 4,
           "descriptions": [
             "hit by attack, runic circles shattering, hair falling momentarily, losing float height, pained expression",
             "tumbling in air, staff nearly dropped, robes tangled, white eyes flickering, trying to stabilize",
@@ -284,7 +284,7 @@
       "base_path": "png/monsters/normal/toxic-slime/frames",
       "actions": {
         "idle": {
-          "frames": 3,
+          "frames": 6,
           "descriptions": [
             "resting blob shape, bubbles forming on surface, nucleus floating center, gentle wobble, acid dripping",
             "slight expansion, surface rippling, nucleus shifting upward, new bubbles popping, amorphous stretch",
@@ -292,7 +292,7 @@
           ]
         },
         "attack": {
-          "frames": 3,
+          "frames": 6,
           "descriptions": [
             "compressing body, pulling back, nucleus glowing brighter, surface tension increasing, about to launch",
             "launching forward, body stretching into projectile shape, toxic spray shooting ahead, aggressive lunge",
@@ -307,7 +307,7 @@
       "base_path": "png/monsters/normal/skeletal-knight/frames",
       "actions": {
         "idle": {
-          "frames": 3,
+          "frames": 8,
           "descriptions": [
             "standing guard, shield raised at chest, sword at ready, blue eye flames steady, tattered tabard hanging still",
             "shifting weight on bony legs, shield adjusting position, jaw rattling, eye flames flickering",
@@ -315,7 +315,7 @@
           ]
         },
         "attack": {
-          "frames": 3,
+          "frames": 6,
           "descriptions": [
             "lunging forward, sword pulled back for thrust, shield dropped to side, blue eye flames blazing, aggressive",
             "thrusting sword forward, full extension, skeletal body committed to attack, bones rattling with force",
@@ -330,7 +330,7 @@
       "base_path": "png/monsters/normal/fungal-beast/frames",
       "actions": {
         "idle": {
-          "frames": 3,
+          "frames": 6,
           "descriptions": [
             "standing on four mycelium legs, spore puffs drifting upward, bioluminescent spots glowing steadily, calm beast",
             "shifting weight, mushroom caps on back swelling slightly, more spores releasing, teal glow pulsing",
@@ -338,7 +338,7 @@
           ]
         },
         "attack": {
-          "frames": 3,
+          "frames": 6,
           "descriptions": [
             "rearing up on back legs, front mycelium tendrils raised to strike, mushroom caps flaring, spore explosion building",
             "slamming down with front legs, massive spore cloud erupting, tendrils smashing, bioluminescence blazing",
@@ -353,7 +353,7 @@
       "base_path": "png/monsters/normal/shadow-wraith/frames",
       "actions": {
         "idle": {
-          "frames": 3,
+          "frames": 6,
           "descriptions": [
             "floating, shadow form rippling, eye points glowing steady purple, tendrils drifting slowly, ethereal presence",
             "form shifting, becoming more solid then transparent, eye points flickering, shadow tendrils swirling",
@@ -361,7 +361,7 @@
           ]
         },
         "attack": {
-          "frames": 3,
+          "frames": 6,
           "descriptions": [
             "lunging forward, shadow form stretching thin, clawed hands reaching out, eye points blazing, tendrils shooting ahead",
             "claws slashing through space, shadow form at maximum extension, dark energy trailing from claws, devastating swipe",
@@ -376,7 +376,7 @@
       "base_path": "png/monsters/normal/clockwork-automaton/frames",
       "actions": {
         "idle": {
-          "frames": 3,
+          "frames": 6,
           "descriptions": [
             "standing mechanical, gears turning visibly, steam puffing from back pipes, eye lens focusing, sawblade idling, steady",
             "gears shifting, eye lens adjusting zoom, sawblade spinning slightly faster then slower, steam venting, mechanical whir",
@@ -384,7 +384,7 @@
           ]
         },
         "attack": {
-          "frames": 3,
+          "frames": 6,
           "descriptions": [
             "sawblade arm revving up, spinning fast, steam pressure building, eye lens locking on target, pistons charging, leaning forward",
             "slashing with sawblade arm at full speed, sparks flying, steam explosion from joints, maximum mechanical force, lunging strike",

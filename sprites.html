@@ -352,22 +352,22 @@
 
 <!-- CHARACTERS -->
 <div class="section-title">PLAYABLE CHARACTERS</div>
-<div class="section-desc">4 actions &times; 4 frames each &mdash; Idle / Attack / Defend / Hurt</div>
+<div class="section-desc">4 actions &times; 4–8 frames each &mdash; Idle / Attack / Defend / Hurt</div>
 <div class="sprite-grid" id="characters-grid"></div>
 
 <!-- BOSSES -->
 <div class="section-title">BOSSES</div>
-<div class="section-desc">4 actions &times; 4 frames each &mdash; Idle / Attack / Charge / Death</div>
+<div class="section-desc">4 actions &times; 8 frames each &mdash; Idle / Attack / Charge / Death</div>
 <div class="sprite-grid" id="bosses-grid"></div>
 
 <!-- ELITES -->
 <div class="section-title">ELITE MONSTERS</div>
-<div class="section-desc">3 actions &times; 3 frames each &mdash; Idle / Attack / Hurt</div>
+<div class="section-desc">3 actions &times; 4–8 frames each &mdash; Idle / Attack / Hurt</div>
 <div class="sprite-grid" id="elites-grid"></div>
 
 <!-- NORMAL MONSTERS -->
 <div class="section-title">NORMAL MONSTERS</div>
-<div class="section-desc">2 actions &times; 3 frames each &mdash; Idle / Attack</div>
+<div class="section-desc">2 actions &times; 6–8 frames each &mdash; Idle / Attack</div>
 <div class="sprite-grid" id="normals-grid"></div>
 
 <div class="footer">
@@ -382,27 +382,27 @@ const entities = {
     { name: "The Wanderer", cn: "流浪剑客", accent: "#4fc3f7", badge: "character",
       basePath: "png/characters/wanderer/frames",
       actions: [
-        { name: "idle", frames: 4 },
-        { name: "attack", frames: 4 },
-        { name: "defend", frames: 4 },
+        { name: "idle", frames: 8 },
+        { name: "attack", frames: 8 },
+        { name: "defend", frames: 8 },
         { name: "hurt", frames: 4 }
       ]
     },
     { name: "The Alchemist", cn: "炼金术士", accent: "#66bb6a", badge: "character",
       basePath: "png/characters/alchemist/frames",
       actions: [
-        { name: "idle", frames: 4 },
-        { name: "attack", frames: 4 },
-        { name: "defend", frames: 4 },
+        { name: "idle", frames: 8 },
+        { name: "attack", frames: 8 },
+        { name: "defend", frames: 8 },
         { name: "hurt", frames: 4 }
       ]
     },
     { name: "The Puppeteer", cn: "傀儡师", accent: "#ce93d8", badge: "character",
       basePath: "png/characters/puppeteer/frames",
       actions: [
-        { name: "idle", frames: 4 },
-        { name: "attack", frames: 4 },
-        { name: "defend", frames: 4 },
+        { name: "idle", frames: 8 },
+        { name: "attack", frames: 8 },
+        { name: "defend", frames: 8 },
         { name: "hurt", frames: 4 }
       ]
     },
@@ -411,19 +411,19 @@ const entities = {
     { name: "The Timeless Wyrm", cn: "永恒龙蛇", accent: "#ef5350", badge: "boss",
       basePath: "png/monsters/boss/timeless-wyrm/frames",
       actions: [
-        { name: "idle", frames: 4 },
-        { name: "attack", frames: 4 },
-        { name: "charge", frames: 4 },
-        { name: "death", frames: 4 }
+        { name: "idle", frames: 8 },
+        { name: "attack", frames: 8 },
+        { name: "charge", frames: 8 },
+        { name: "death", frames: 8 }
       ]
     },
     { name: "The Hollow King", cn: "虚空骨王", accent: "#ab47bc", badge: "boss",
       basePath: "png/monsters/boss/hollow-king/frames",
       actions: [
-        { name: "idle", frames: 4 },
-        { name: "attack", frames: 4 },
-        { name: "charge", frames: 4 },
-        { name: "death", frames: 4 }
+        { name: "idle", frames: 8 },
+        { name: "attack", frames: 8 },
+        { name: "charge", frames: 8 },
+        { name: "death", frames: 8 }
       ]
     },
   ],
@@ -431,17 +431,17 @@ const entities = {
     { name: "Molten Golem", cn: "熔岩石像", accent: "#ff7043", badge: "elite",
       basePath: "png/monsters/elite/molten-golem/frames",
       actions: [
-        { name: "idle", frames: 3 },
-        { name: "attack", frames: 3 },
-        { name: "hurt", frames: 3 }
+        { name: "idle", frames: 6 },
+        { name: "attack", frames: 8 },
+        { name: "hurt", frames: 4 }
       ]
     },
     { name: "Dark Enchantress", cn: "暗黑女巫", accent: "#ec407a", badge: "elite",
       basePath: "png/monsters/elite/dark-enchantress/frames",
       actions: [
-        { name: "idle", frames: 3 },
-        { name: "attack", frames: 3 },
-        { name: "hurt", frames: 3 }
+        { name: "idle", frames: 6 },
+        { name: "attack", frames: 8 },
+        { name: "hurt", frames: 4 }
       ]
     },
   ],
@@ -449,36 +449,36 @@ const entities = {
     { name: "Toxic Slime", cn: "腐蚀史莱姆", accent: "#8bc34a", badge: "normal",
       basePath: "png/monsters/normal/toxic-slime/frames",
       actions: [
-        { name: "idle", frames: 3 },
-        { name: "attack", frames: 3 }
+        { name: "idle", frames: 6 },
+        { name: "attack", frames: 6 }
       ]
     },
     { name: "Skeletal Knight", cn: "幽骨骑士", accent: "#78909c", badge: "normal",
       basePath: "png/monsters/normal/skeletal-knight/frames",
       actions: [
-        { name: "idle", frames: 3 },
-        { name: "attack", frames: 3 }
+        { name: "idle", frames: 8 },
+        { name: "attack", frames: 6 }
       ]
     },
     { name: "Fungal Beast", cn: "菌蕈巨兽", accent: "#26a69a", badge: "normal",
       basePath: "png/monsters/normal/fungal-beast/frames",
       actions: [
-        { name: "idle", frames: 3 },
-        { name: "attack", frames: 3 }
+        { name: "idle", frames: 6 },
+        { name: "attack", frames: 6 }
       ]
     },
     { name: "Shadow Wraith", cn: "暗影幽灵", accent: "#7e57c2", badge: "normal",
       basePath: "png/monsters/normal/shadow-wraith/frames",
       actions: [
-        { name: "idle", frames: 3 },
-        { name: "attack", frames: 3 }
+        { name: "idle", frames: 6 },
+        { name: "attack", frames: 6 }
       ]
     },
     { name: "Clockwork Automaton", cn: "发条机关人", accent: "#ffa726", badge: "normal",
       basePath: "png/monsters/normal/clockwork-automaton/frames",
       actions: [
-        { name: "idle", frames: 3 },
-        { name: "attack", frames: 3 }
+        { name: "idle", frames: 6 },
+        { name: "attack", frames: 6 }
       ]
     },
   ]
