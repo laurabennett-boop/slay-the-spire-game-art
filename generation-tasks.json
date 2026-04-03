@@ -34,11 +34,13 @@
           ]
         },
         "hurt": {
-          "frames": 4,
+          "frames": 6,
           "descriptions": [
             "moment of impact, head snapping back, body jolting from hit, pain expression",
             "staggering backward, one arm clutching wound, sword dropping low, off-balance",
             "deep recoil, bent over slightly, grimacing in pain, one knee dipping",
+            "stumbling further back, hat nearly falling off, sword dragging on ground, struggling",
+            "catching balance, one hand on knee, breathing hard, sweat on brow, sword gripped loosely",
             "recovering from hit, straightening up, gripping sword tighter, determined expression"
           ]
         }
@@ -77,11 +79,13 @@
           ]
         },
         "hurt": {
-          "frames": 4,
+          "frames": 6,
           "descriptions": [
             "hit by attack, flasks rattling on belt, goggles askew, body jerking from impact",
             "stumbling back, a flask falling from belt and shattering, chemicals spilling, pained expression",
             "doubled over, clutching side, broken glass on ground, grimacing, goggles hanging off one ear",
+            "staggering sideways, hand reaching for belt but missing, another flask cracking, losing balance",
+            "one knee on ground, hand bracing against floor, goggles dangling, catching breath, chemical fumes rising",
             "recovering, pushing goggles back up, steadying self, reaching for another flask"
           ]
         }
@@ -120,11 +124,13 @@
           ]
         },
         "hurt": {
-          "frames": 4,
+          "frames": 6,
           "descriptions": [
             "struck, mask cracking slightly, strings snapping and flailing, body jerking from impact",
             "staggering, puppet spirits scattering, some strings going limp, losing control momentarily",
             "bent forward, mask showing damage, frantically trying to re-establish string connections, pained",
+            "stumbling sideways, coat billowing, more strings disconnecting, puppet spirits flickering and fading",
+            "dropping to one knee, fingers twitching desperately, faint string glow returning, mask fragment falling",
             "recovering, strings reconnecting one by one, puppet spirits returning, mask still cracked but standing firm"
           ]
         }
@@ -238,10 +244,13 @@
           ]
         },
         "hurt": {
-          "frames": 4,
+          "frames": 6,
           "descriptions": [
             "struck hard, chunks of rock flying off body, lava spurting from new cracks, staggering",
             "reeling, body fracturing further, magma leaking from wounds, one knee buckling, stone crumbling",
+            "massive chunk of shoulder breaking off, molten core exposed, steam erupting from fracture, stumbling",
+            "dropping to one knee, stone fist bracing against ground, lava pooling beneath, body cracking more",
+            "lava surging through cracks to seal wounds, rocks re-forming over exposed core, angry rumbling",
             "stabilizing, cracks sealing with cooling lava, reforming damaged sections, angry glowing eyes"
           ]
         }
@@ -269,10 +278,13 @@
           ]
         },
         "hurt": {
-          "frames": 4,
+          "frames": 6,
           "descriptions": [
             "hit by attack, runic circles shattering, hair falling momentarily, losing float height, pained expression",
             "tumbling in air, staff nearly dropped, robes tangled, white eyes flickering, trying to stabilize",
+            "plummeting lower, hair completely fallen, crystal orb cracking further, dark energy sparking wildly",
+            "hovering barely above ground, one hand reaching up, staff dragging, robes pooling, struggling to rise",
+            "slowly rising, hair beginning to lift again, faint purple glow returning to hands, gritting teeth",
             "recovering float, hair rising again, reforming runic circles one by one, gripping staff tightly"
           ]
         }

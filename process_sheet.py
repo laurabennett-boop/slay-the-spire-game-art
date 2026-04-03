@@ -32,12 +32,20 @@ def detect_layout(img, num_frames):
             return (2, 2)
         return (1, 4)
     elif num_frames == 6:
+        # Check 2×3 (2 rows, 3 cols) first
         if has_horizontal_white_band(h // 2):
             return (2, 3)
+        # Check 3×2 (3 rows, 2 cols) for portrait images
+        if has_horizontal_white_band(h // 3):
+            return (3, 2)
         return (1, 6)
     elif num_frames == 8:
+        # Check 2×4 first
         if has_horizontal_white_band(h // 2):
             return (2, 4)
+        # Check 4×2 for portrait images
+        if has_horizontal_white_band(h // 4):
+            return (4, 2)
         return (1, 8)
     elif num_frames == 3:
         return (1, 3)
