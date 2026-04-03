@@ -5,10 +5,12 @@ import sys
 from pathlib import Path
 from PIL import Image
 import numpy as np
+from scipy import ndimage
 
 OUTPUT_SIZE = (512, 512)
 CONTENT_RATIO = 0.85
 BOTTOM_PAD = 0.03
+CELL_MARGIN_RATIO = 0.07  # Trim 7% from each inner edge to remove bleed from adjacent cells
 
 
 def detect_layout(img, num_frames):
@@ -49,6 +51,10 @@ def split_sheet(img, num_frames):
     frame_w = w // cols
     frame_h = h // rows
 
+    # Calculate margin to trim from inner edges (where adjacent cells can bleed)
+    margin_x = int(frame_w * CELL_MARGIN_RATIO)
+    margin_y = int(frame_h * CELL_MARGIN_RATIO)
+
     frames = []
     for r in range(rows):
         for c in range(cols):
@@ -56,7 +62,17 @@ def split_sheet(img, num_frames):
                 break
             left = c * frame_w
             top = r * frame_h
-            frame = img.crop((left, top, left + frame_w, top + frame_h))
+            # Trim inner edges only (not outer edges of the sheet)
+            trim_left = margin_x if c > 0 else 0
+            trim_right = margin_x if c < cols - 1 else 0
+            trim_top = margin_y if r > 0 else 0
+            trim_bottom = margin_y if r < rows - 1 else 0
+            frame = img.crop((
+                left + trim_left,
+                top + trim_top,
+                left + frame_w - trim_right,
+                top + frame_h - trim_bottom
+            ))
             frames.append(frame)
 
     return frames
@@ -77,6 +93,49 @@ def remove_background(img):
     return Image.fromarray(arr)
 
 
+def remove_disconnected_artifacts(img, min_ratio=0.05):
+    """Remove small disconnected blobs that are separate from the main character.
+    Uses erosion to break thin connections (like spark lines), then keeps only
+    components that are large enough relative to the main character."""
+    arr = np.array(img)
+    alpha = arr[:, :, 3]
+    mask = alpha > 30
+
+    if not mask.any():
+        return img
+
+    # Erode to break thin connections (spark lines, wisps), then find components
+    eroded = ndimage.binary_erosion(mask, iterations=3)
+    if not eroded.any():
+        return img
+
+    labeled, num_features = ndimage.label(eroded)
+    if num_features <= 1:
+        return img
+
+    # Find the largest component
+    component_sizes = ndimage.sum(eroded, labeled, range(1, num_features + 1))
+    largest_label = np.argmax(component_sizes) + 1
+    max_size = component_sizes[largest_label - 1]
+
+    # Dilate the largest component back to original extent to recover edges
+    largest_mask = labeled == largest_label
+    recovered = ndimage.binary_dilation(largest_mask, iterations=6)
+
+    # Keep pixels that are in the original mask AND within the recovered region
+    # Also keep any other large components
+    keep_mask = mask & recovered
+    for i, size in enumerate(component_sizes):
+        if size >= max_size * min_ratio and (i + 1) != largest_label:
+            comp_mask = labeled == (i + 1)
+            comp_recovered = ndimage.binary_dilation(comp_mask, iterations=6)
+            keep_mask |= (mask & comp_recovered)
+
+    # Zero out alpha for removed components
+    arr[~keep_mask, 3] = 0
+    return Image.fromarray(arr)
+
+
 def get_content_bbox(img):
     arr = np.array(img)
     alpha = arr[:,:,3]
@@ -91,7 +150,7 @@ def get_content_bbox(img):
 
 def normalize_and_save(frames, output_paths):
     """Normalize frames to consistent size on OUTPUT_SIZE canvas, save."""
-    rgba_frames = [remove_background(f) for f in frames]
+    rgba_frames = [remove_disconnected_artifacts(remove_background(f)) for f in frames]
     bboxes = [get_content_bbox(f) for f in rgba_frames]
 
     valid = [(i, b) for i, b in enumerate(bboxes) if b is not None]
